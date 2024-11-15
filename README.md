@@ -191,8 +191,8 @@ censys-assessment/
 
    ```
    censys-assessment/
-   ├── backend/                    # Backend proxy implementation
-   │   ├── build/                  # Build folder containing compiled React UI search application
+   ├── backend/         # Backend proxy implementation
+   │   ├── build/       # Build folder containing compiled React UI search application
    ```
 
 ---
@@ -221,18 +221,35 @@ Make sure **frontend app** has been built before running any test.
 ## Deployment
 
 ### **To Deploy Locally**
-1. Build the project:
+1. Build the frontend project:
    ```bash
    npm run build
    ```
+   Make sure `backend/build` is updated.
 
-2. Serve the build folder:
+2. Serve the stand-up application from backend folder folder:
    ```bash
-   npx serve -s build
+   cd backend
+   node index.js
+   ```
+   Or
+
+   Package stand-alone application for distribution and execution:
+   ```bash
+   cd backend
+   pkg .
    ```
 
-### **To Deploy on Production**
-Deploy the contents of the `build` (or custom `BUILD_PATH`) directory to your hosting provider (e.g., AWS S3, Netlify, Vercel).
+   Following files should be generated:
+
+   ```
+   censys-assessment/
+   ├── backend/         # Backend proxy implementation
+   │   ├── backend-linux/       # Stand-alone application to run on Linux
+   │   ├── backend-macos/       # Stand-alone application to run on Mac OS
+   │   ├── backend-windows/     # Stand-alone application to run on Windows
+   ```
+
 
 ---
 
