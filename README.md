@@ -92,10 +92,10 @@ To enhance security, the application includes a **Node.js-based secure proxy bac
    The application supports both production and development modes, each tailored for specific use cases:
 
    - Production Mode:
-      In this mode, both the Frontend and Backend applications run on the same Node.js service instance on port 5001. The backend proxy is started to handle API requests securely, while the Frontend application is served as pre-built static files deployed under the build folder. This configuration is ideal for deployment in production environments.
+      In this mode, both the Frontend and Backend applications run on the same Node.js service instance on port `5001`. The backend proxy is started to handle API requests securely, while the Frontend application is served as pre-built static files deployed under the build folder. This configuration is ideal for deployment in production environments, for more details, review [Deployment](#deployment) section.
 
    - Development Mode:
-      Designed for development purposes, this mode allows developers to work on the Frontend with real-time code reloading, enabling efficient testing and debugging. In this setup, the backend proxy runs on port 5001 to handle API requests, while the Frontend runs on a separate development server on port 3000. Both services must run simultaneously for full functionality.
+      Designed for development purposes, this mode allows developers to work on the Frontend with real-time code reloading, enabling efficient testing and debugging. In this setup, the backend proxy runs on port `5001` to handle API requests, while the Frontend runs on a separate development server on port `3000`. Both services must run simultaneously for full functionality.
 
    Below are the instructions on how to start frontend and/or backend applications.
 
