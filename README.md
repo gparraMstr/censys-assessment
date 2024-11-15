@@ -444,12 +444,12 @@ import SearchBar from './SearchBar';
 3.	Write test cases using describe and it blocks:
 ```typescript
    describe('SearchBar Component', () => {
-   it('renders the input field correctly', () => {
-      render(<SearchBar onSearch={jest.fn()} isLoading={false} />);
-      const input = screen.getByRole('textbox');
-      expect(input).toBeInTheDocument();
+      it('renders the input field correctly', () => {
+         render(<SearchBar onSearch={jest.fn()} isLoading={false} />);
+         const input = screen.getByRole('textbox');
+         expect(input).toBeInTheDocument();
+      });
    });
-});
 ```
 4.	Run the test:
 ```bash
@@ -473,16 +473,46 @@ The coverage report provides insights into which parts of the codebase are not t
 
 ---
 
-## Deployment
+# Deployment
 
-### **To Deploy and Run Locally**
+This application provides flexible deployment options to cater to different stages of the development lifecycle and production use cases. Whether running locally for testing or packaging as a standalone executable (assessment requirement), the deployment process ensures the integration of both frontend and backend components.
+
+---
+
+## Available Deployment Methods
+
+1. **Local Deployment for Testing and Development**:  
+   This mode is suitable for local testing or active development. The backend proxy runs as a `Node.js` application, and the frontend is built and served as static files through the same instance.  
+   **Steps**:
+   - Build the frontend using `npm run build`.
+   - Start the backend proxy and serve the frontend by running `node index.js` or `npm run start` from the `backend` directory.
+   - Access the application locally at `http://localhost:5001`.
+
+2. **Standalone Application for Distribution**:  
+   This method packages the application (frontend and backend) into a single executable for easy distribution. The standalone version eliminates dependencies on external runtime environments like Node.js, making it ideal for deploying on various operating systems (Linux, MacOS, Windows).  
+   **Steps**:
+   - Build the frontend if not already built using `npm run build`.
+   - Package the application using `pkg .` from the `backend` directory.
+   - Run the generated executable to launch the application on port `5001`.
+
+3. **Production-Ready Deployment**:  
+   In a production environment, the application can be deployed as a consolidated Node.js service. The backend proxy securely handles API calls, and the frontend is served as pre-built static files.  
+   **Steps**:
+   - Build the frontend project using `npm run build`.
+   - Deploy the contents of the `backend` folder, ensuring `index.js` serves both the proxy and the static frontend files.
+   - Configure a process manager (e.g., PM2) or containerize the application for enhanced reliability.
+
+---
+
+## To Deploy and Run Locally
+
 1. Build the frontend project:
    ```bash
    npm run build
    ```
-   Make sure `backend/build` is updated.
+   Ensure `backend/build` is updated.
 
-2. Start the proxy and frontend as `Node.js` application together from backend folder folder:
+2. Start the proxy and frontend as a combined Node.js application:
    ```bash
    cd backend
    node index.js
@@ -490,40 +520,49 @@ The coverage report provides insights into which parts of the codebase are not t
    npm run start
    ```
 
-3. Open browser and load `http://localhost:5001'
+3. Open your browser and navigate to:
+   ```plaintext
+   http://localhost:5001
+   ```
 
+---
 
-### **To create and package a stand-alone application**
+## To Create and Package a Standalone Application
 
-1. Build the frontend project if not built already:
+1. Build the frontend project (if not already built):
    ```bash
    npm run build
    ```
-   Make sure `backend/build` is updated.
+   Confirm `backend/build` is up-to-date.
 
-2. Package and create stand-alone application for distribution and execution:
+2. Package the application for distribution:
    ```bash
    cd backend
    pkg .
    ```
 
-3. Following files should be generated:
-
+3. The following files will be generated in the `backend` directory:
    ```
    censys-assessment/
-   ├── backend/         # Backend proxy implementation
-   │   ├── backend-linux/       # Stand-alone application to run on Linux
-   │   ├── backend-macos/       # Stand-alone application to run on Mac OS
-   │   ├── backend-windows/     # Stand-alone application to run on Windows
+   ├── backend/                # Backend proxy implementation
+   │   ├── backend-linux/      # Standalone application for Linux
+   │   ├── backend-macos/      # Standalone application for MacOS
+   │   ├── backend-windows/    # Standalone application for Windows
    ```
 
-4. Executing any of these files will an instance of node.js on port `5001`:
+4. Run the appropriate executable for your operating system. For example:
    ```bash
    cd backend
    ./backend-macos
    ```
 
-5. Open a browser and load `http://localhost:5001` to test.
+5. Open your browser and navigate to:
+   ```plaintext
+   http://localhost:5001
+   ```
+
+---
+
 
 ---
 
