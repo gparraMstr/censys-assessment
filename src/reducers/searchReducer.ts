@@ -27,7 +27,8 @@ export type Action =
   | { type: 'SET_RESULTS'; payload: ActionResults } // Action to set new results
   | { type: 'APPEND_RESULTS'; payload: ActionAppendResults } // Action to append results
   | { type: 'SET_QUERY'; payload: string } // Action to set the current query
-  | { type: 'UNKNOWN_ACTION'; }; // Action to set the current query
+  | { type: 'UNKNOWN_ACTION'; } // Action to set the current query
+  | { type: 'CLEAR_RESULTS'; };
 
 /**
  * Reducer function to manage search-related state transitions.
@@ -37,6 +38,8 @@ export type Action =
  */
 export const searchReducer = (state: typeof initialState, action: Action) => {
   switch (action.type) {
+    case 'CLEAR_RESULTS':
+      return initialState;
     case 'SET_LOADING':
       // Toggle loading state
       return { ...state, isLoading: action.payload };

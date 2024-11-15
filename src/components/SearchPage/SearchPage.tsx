@@ -1,6 +1,6 @@
 // src/components/SearchPage/SearchPage.tsx
 
-import React, { useReducer } from 'react';
+import React, { useReducer, useState } from 'react';
 import SearchBar from './SearchBar'; // Component for the search input and submit button
 import ResultList from './ResultList'; // Component to display the list of results
 import PaginationButton from './PaginationButton'; // Button to load more results
@@ -25,6 +25,8 @@ const SearchPage: React.FC = () => {
   // Destructure state variables for easier usage
   const { results, isLoading, hasMoreResults, pageToken, total, query } = state;
 
+  const [errorMsg, setErrorMsg] = useState<string>('');
+
   /**
    * Handles a new search query submission.
    * Clears previous results and fetches the first page of new results.
@@ -46,8 +48,8 @@ const SearchPage: React.FC = () => {
         },
       });
     } catch (error) {
-      console.error('Error fetching search results:', error); // Log errors
-      dispatch({ type: 'SET_LOADING', payload: false }); // End loading
+      dispatch({ type: 'CLEAR_RESULTS' }); // End loading
+      setErrorMsg(error instanceof Error ? error.message : 'An unknown error occurred');
     }
   };
 
@@ -87,7 +89,7 @@ const SearchPage: React.FC = () => {
       {/* Conditional rendering for results or no-results message */}
       {!areThereAnyResults && !isLoading ? (
         <Typography variant="body1" color="text.secondary" sx={{ margin: '20px' }}>
-          No results found.
+          { errorMsg || 'No results found.'}
         </Typography>
       ) : (
         <>

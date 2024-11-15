@@ -40,7 +40,8 @@ export const fetchSearchResults = async (
 
     // Check if the response is successful
     if (!response.ok) {
-        throw new Error(`Error fetching search results: ${response.statusText}`);
+        const error = await response.json();
+        throw new Error(error.error);
     }
 
     // Parse the response JSON and return it
