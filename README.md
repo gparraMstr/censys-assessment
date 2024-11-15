@@ -77,7 +77,7 @@ A React-based web application designed for searching IPv4 hosts and displaying d
 
    First, it will be necessary to build Frontend code prior to running the application as indicated in the [Frontend Build Instructions](#build-instructions).
 
-   Now, there are two ways to run the application: production mode and development mode.
+   Now, there are three ways to run the application: production mode and development mode.
 
 	1.	**Production**: As specified in the assessment requirements, this is a self-contained application that includes both the backend service and the frontend UI. It runs on port `5001`. The backend proxy is started to handle API requests, and the UI application is served as a static build. This setup is ideal for deployment in production environments.
 
@@ -86,19 +86,21 @@ A React-based web application designed for searching IPv4 hosts and displaying d
    Below are the instructions on how to start frontend and/or backend applications.
 
    - **Backend**:
-     Start the backend proxy server:
+     Start the backend proxy server which also serves the UI app as static content:
      ```bash
      cd backend
      node index.js
      ```
 
    - **Frontend**:
-     Start the frontend React application:
+     Start the frontend React application in dev mode and requires the backend to be running to use proxy:
      ```bash
      npm run start
      ```
 
    As previously indicated, the application will run at `http://localhost:3000`, and the backend proxy server will handle API requests at `http://localhost:5001`.
+
+   Another alternative is to package both Frontend and Backend application into a **stand-alone application** as explained in the [Deployment](#deployment)
 
 ---
 
@@ -232,15 +234,22 @@ Make sure **frontend app** has been built before running any test.
    cd backend
    node index.js
    ```
-   Or
 
-   Package stand-alone application for distribution and execution:
+### **To create and package a stand-alone application**
+
+1. Build the frontend project if not built already:
+   ```bash
+   npm run build
+   ```
+   Make sure `backend/build` is updated.
+
+2. Package and create stand-alone application for distribution and execution:
    ```bash
    cd backend
    pkg .
    ```
 
-   Following files should be generated:
+3. Following files should be generated:
 
    ```
    censys-assessment/
