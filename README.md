@@ -13,7 +13,7 @@ A React-based web application designed for searching IPv4 hosts and displaying d
 2. [Installation](#installation)
 3. [Folder Structure](#folder-structure)
 4. [Backend Implementation as a Secure Proxy](#backend-implementation-as-a-secure-proxy)
-5. [Components Overview](#components-overview)
+5. [Frontend Components and Architecture](#frontend-components-and-architecture)
 6. [Frontend Build Instructions](#build-instructions)
 7. [Frontend Testing](#testing)
 8. [Deployment](#deployment)
@@ -76,20 +76,20 @@ A React-based web application designed for searching IPv4 hosts and displaying d
 
 4. **Run the Application**
 
-   First, it will be necessary to build Frontend code prior to running the application as indicated in the [Frontend Build Instructions](#build-instructions).
+   First, it will be necessary to **build Frontend code** prior to running the application as indicated in the [Frontend Build Instructions](#build-instructions).
 
    Now, there are three ways to run the application: production mode and development mode.
 
    1. **Stand-alone app**: As specified in the assessment requirements, this is a self-contained application which will require packaging both Frontend and Backend applications into a stand-alone application to run on Linux, MacOS and Windows. This is fully explained in the [Deployment](#deployment).
 
-	2.	**Production**: Runs both Frontend and Backend application on same node.js service instance on port `5001`. The backend proxy is started to handle API requests, and the Frontend application is served as a static build in this mode. The frontend application is built into compiled content and deployed to backend deployment under the `build` folder as static content.
+	2.	**Production**: Runs both Frontend and Backend application on same `node.js` service instance on port `5001`. The backend proxy is started to handle API requests, and the Frontend application is served as a static build in this mode. The frontend application is built into compiled content and deployed to backend deployment under the `build` folder as static content.
  
    3. **Development**: Designed for development purposes, this mode allows developers to continue working on frontend application development with real-time code reloading. In this mode, both the frontend and backend must be run simultaneously: the backend proxy runs on port `5001`, while the frontend runs on port `3000`. This setup facilitates efficient development and testing.
 
    Below are the instructions on how to start frontend and/or backend applications.
 
    - **Backend**:
-     Start the backend proxy server which also serves the UI app as static content:
+     Start the backend proxy service which also serves the UI app as static content:
      ```bash
      cd backend
      node index.js
@@ -98,7 +98,7 @@ A React-based web application designed for searching IPv4 hosts and displaying d
      ```
 
    - **Frontend**:
-     Start the frontend React application in dev mode and requires the backend to be running to use proxy:
+     Start the frontend React application in dev mode and also requires the backend to be running to use proxy:
      ```bash
      npm run start
      ```
@@ -139,7 +139,6 @@ censys-assessment/
 │   ├── .env                    # Backend environment variables
 │   └── README.md               # Documentation for the backend
 ├── .env                        # Frontend environment variables
-├── README.md                   # Documentation
 ├── package.json                # Frontend dependencies and scripts
 ```
 
@@ -222,41 +221,97 @@ This implementation enhances the overall security of the application by isolatin
 
 ---
 
-## Components Overview
+# Frontend Components and Architecture
 
-### `SearchPage`
-- **Location**: `src/components/SearchPage/SearchPage.tsx`
-- **Purpose**: Main container for search functionality, managing state and rendering sub-components.
-
-### `SearchBar`
-- **Location**: `src/components/SearchPage/SearchBar.tsx`
-- **Purpose**: Provides a text input for users to submit their search query.
-
-### `ResultList`
-- **Location**: `src/components/SearchPage/ResultList.tsx`
-- **Purpose**: Displays a list of search results using `ResultItem` for each entry.
-
-### `ResultItem`
-- **Location**: `src/components/SearchPage/ResultItem.tsx`
-- **Purpose**: Renders details for an individual search result, including associated protocols.
-
-### `LoadingSpinner`
-- **Location**: `src/components/SearchPage/LoadingSpinner.tsx`
-- **Purpose**: Shows a spinner during loading states.
-
-### `PaginationButton`
-- **Location**: `src/components/SearchPage/PaginationButton.tsx`
-- **Purpose**: Button to fetch and append the next page of results.
-
-### `searchReducer`
-- **Location**: `src/reducers/searchReducer.ts`
-- **Purpose**: Handles state transitions for search functionality.
-
-### `searchService`
-- **Location**: `src/services/searchService.ts`
-- **Purpose**: Contains functions for making API calls to search and fetch paginated results.
+The frontend of the application is built using React and TypeScript, leveraging a modular component-based architecture to ensure scalability, maintainability, and reusability. Below is an explanation of each key component and the overall structure.
 
 ---
+
+## Key Components
+
+### **1. SearchPage**
+- **Location**: `src/components/SearchPage/SearchPage.tsx`
+- **Description**: This is the main container for the search functionality. It manages the state for the search process, including query input, results, loading state, and pagination.
+- **Responsibilities**:
+  - Coordinates interactions between child components (e.g., `SearchBar`, `ResultList`).
+  - Manages the application's primary state (e.g., results, loading state, pagination tokens).
+  - Sends requests to the backend proxy and handles responses.
+
+---
+
+### **2. SearchBar**
+- **Location**: `src/components/SearchPage/SearchBar.tsx`
+- **Description**: A controlled input field for users to enter search queries.
+- **Responsibilities**:
+  - Captures user input.
+  - Triggers the `onSearch` callback when the search form is submitted.
+  - Displays a loading indicator while requests are in progress.
+
+---
+
+### **3. ResultList**
+- **Location**: `src/components/SearchPage/ResultList.tsx`
+- **Description**: Renders a list of search results.
+- **Responsibilities**:
+  - Iterates over the `results` array and renders each result using the `ResultItem` component.
+  - Handles scenarios where no results are available.
+
+---
+
+### **4. ResultItem**
+- **Location**: `src/components/SearchPage/ResultItem.tsx`
+- **Description**: Displays individual search result details, such as the IP address and associated protocols.
+- **Responsibilities**:
+  - Formats and displays information for a single search result.
+  - Handles protocol visualization using the `ResultItemProtocol` component.
+
+---
+
+### **5. LoadingSpinner**
+- **Location**: `src/components/SearchPage/LoadingSpinner.tsx`
+- **Description**: Displays a spinner when the application is loading.
+- **Responsibilities**:
+  - Provides feedback to the user during API calls.
+
+---
+
+### **6. PaginationButton**
+- **Location**: `src/components/SearchPage/PaginationButton.tsx`
+- **Description**: A button to load the next page of results.
+- **Responsibilities**:
+  - Triggers the `onLoadMore` callback when clicked.
+  - Handles the disabled state when no more results are available or a request is in progress.
+
+---
+
+### **7. State Management**
+- **Reducer**: `src/reducers/searchReducer.ts`
+  - Manages the application state (e.g., results, query, loading state, pagination tokens) using a reducer-based approach.
+- **Hooks**: Custom hooks like `useSearchService` abstract the logic for interacting with the backend API and provide a clean interface for components.
+
+---
+
+## Architecture
+
+### **Component-Based Design**
+- **Modular Components**:
+  - The application is divided into reusable components to promote separation of concerns and improve maintainability.
+- **State Management**:
+  - Centralized state management is achieved using a reducer pattern (`searchReducer`), ensuring predictable state transitions.
+
+### **Data Flow**
+1. **Frontend Interaction**:
+   - Users interact with the UI through the `SearchBar` and `PaginationButton` components.
+2. **API Requests**:
+   - Requests are sent to the backend proxy via the `searchService`.
+3. **State Updates**:
+   - Responses are processed and the state is updated using the reducer.
+4. **Rendering**:
+   - Updated state triggers a re-render of the `ResultList` and associated components.
+
+---
+
+This architecture ensures the application remains scalable and maintainable while providing a clean and responsive user experience.
 
 ## Frontend Build Instructions
 
