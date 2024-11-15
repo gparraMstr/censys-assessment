@@ -92,7 +92,7 @@ To enhance security, the application includes a **Node.js-based secure proxy bac
    The application supports both production and development modes, each tailored for specific use cases:
 
    - Production Mode:
-      In this mode, both the Frontend and Backend applications run on the same Node.js service instance on port `5001`. The backend proxy is started to handle API requests securely, while the Frontend application is served as pre-built static files deployed under the build folder. This configuration is ideal for deployment in production environments, for more details, review [Deployment](#deployment) section.
+      In this mode, both the Frontend and Backend applications run on the same Node.js service instance on port `5001`. The backend proxy is started to handle API requests securely, while the Frontend application is served as pre-built static files deployed under the build folder. This configuration is ideal for deployment in production environments.
 
    - Development Mode:
       Designed for development purposes, this mode allows developers to work on the Frontend with real-time code reloading, enabling efficient testing and debugging. In this setup, the backend proxy runs on port `5001` to handle API requests, while the Frontend runs on a separate development server on port `3000`. Both services must run simultaneously for full functionality.
@@ -576,14 +576,32 @@ This application provides flexible deployment options to cater to different stag
 
 ## Environment Variables
 
-### Required Variables to defined for backend application in `.env` file:
-- `CENSYS_API_ID`: Your API ID for Censys.
-- `CENSYS_API_SECRET`: Your API Secret for Censys.
-- `CENSYS_API_URL`: URL to Censys Search REST API endpoint.
+To ensure secure and seamless configuration, the application relies on environment variables for both the frontend and backend. These variables allow sensitive information, such as API credentials, to be stored securely and enable customization for different environments (e.g., development, testing, production).
 
-### Required Variables for frontend `.env`:
-- `BUILD_PATH`: Custom build folder path under backend folder (`./backend/build`).
-- `REACT_APP_CENSYS_PROXY_URL`: URL to backend proxy
+Each environment variable should be defined in the respective `.env`` files for the frontend and backend folders, ensuring proper integration and functionality. 
+
+```
+censys-assessment/
+├── backend/      # Backend proxy implementation
+│   ├── .env      # Backend environment variables file
+├── .env          # Frontend environment variables file
+```
+
+Below are the required environment variables for each part of the application:
+
+### Backend Environment Variables
+
+The backend requires the following variables to securely interact with the Censys REST API:
+- `CENSYS_API_ID`: Your unique API ID for Censys.
+- `CENSYS_API_SECRET`: Your secret key for Censys API authentication.
+- `CENSYS_API_URL`: The endpoint URL for the Censys Search REST API.
+
+### Frontend Environment Variables
+
+The frontend requires the following variables to configure the build path and communicate with the backend proxy:
+- `BUILD_PATH`: Specifies the path for the compiled frontend build folder, typically set to `./backend/build`.
+- `REACT_APP_CENSYS_PROXY_URL`: The URL of the backend proxy for secure API requests.
+
 
 ---
 
