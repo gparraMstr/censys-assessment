@@ -405,34 +405,36 @@ src/
 
 #### Components
 
-	- SearchBar:
-	   - Validates user input handling.
-	   - Ensures onSearch is triggered on form submission.
-	   - Confirms the correct behavior of the loading state.
-	- ResultList:
-	   - Ensures all results are rendered correctly.
-	   - Tests scenarios with empty results.
-	- ResultItem:
-	   - Validates the correct rendering of individual result items, including IP and protocols.
-	- PaginationButton:
-	   - Ensures the button is disabled when there are no more results or during loading.
-	   - Verifies onLoadMore is triggered on click.
+- SearchBar:
+   - Validates user input handling.
+   - Ensures onSearch is triggered on form submission.
+   - Confirms the correct behavior of the loading state.
+- ResultList:
+   - Ensures all results are rendered correctly.
+   - Tests scenarios with empty results.
+- ResultItem:
+   - Validates the correct rendering of individual result items, including IP and protocols.
+- PaginationButton:
+   - Ensures the button is disabled when there are no more results or during loading.
+   - Verifies onLoadMore is triggered on click.
 
 #### Reducer
 
-	- searchReducer:
-	   - Tests state updates for all action types (SET_LOADING, SET_RESULTS, APPEND_RESULTS, SET_QUERY).
-	   - Validates default state and error handling for unknown actions.
+- searchReducer:
+   - Tests state updates for all action types (SET_LOADING, SET_RESULTS, APPEND_RESULTS, SET_QUERY).
+   - Validates default state and error handling for unknown actions.
 
 #### Utilities
 
-	- formatUtils:
-	   - Tests formatting functions for accuracy, such as protocol count and string manipulations.
+- formatUtils:
+   - Tests formatting functions for accuracy, such as protocol count and string manipulations.
 
+---
 
 ### Writing New Tests
 
 To add a new test:
+
 	1.	Create a .test.tsx file alongside the component or utility to be tested.
 	2.	Import the necessary libraries:
    ```typescript
@@ -457,17 +459,17 @@ To add a new test:
 
 ### Debugging Tests
 
-	- Use the `--watch` flag to run tests interactively:
-   ```bash
-   npm test -- --watch
-   ```
+- Use the `--watch` flag to run tests interactively:
+```bash
+npm test -- --watch
+```
 
-   - Use the `--coverage` flag to generate a test coverage report:
-   ```bash
-   npm test -- --coverage
-   ```
+- Use the `--coverage` flag to generate a test coverage report:
+```bash
+npm test -- --coverage
+```
 
-   The coverage report provides insights into which parts of the codebase are not tested.
+The coverage report provides insights into which parts of the codebase are not tested.
 
 ---
 
