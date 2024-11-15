@@ -435,25 +435,25 @@ src/
 
 To add a new test:
 
-	1.	Create a .test.tsx file alongside the component or utility to be tested.
-	2.	Import the necessary libraries:
-   ```typescript
-   import { render, screen } from '@testing-library/react';
-   import SearchBar from './SearchBar';
-   ```
-   3.	Write test cases using describe and it blocks:
-   ```typescript
-      describe('SearchBar Component', () => {
-      it('renders the input field correctly', () => {
-         render(<SearchBar onSearch={jest.fn()} isLoading={false} />);
-         const input = screen.getByRole('textbox');
-         expect(input).toBeInTheDocument();
-      });
+1.	Create a .test.tsx file alongside the component or utility to be tested.
+2.	Import the necessary libraries:
+```typescript
+import { render, screen } from '@testing-library/react';
+import SearchBar from './SearchBar';
+```
+3.	Write test cases using describe and it blocks:
+```typescript
+   describe('SearchBar Component', () => {
+   it('renders the input field correctly', () => {
+      render(<SearchBar onSearch={jest.fn()} isLoading={false} />);
+      const input = screen.getByRole('textbox');
+      expect(input).toBeInTheDocument();
    });
-   ```
-   4.	Run the test:
-   ```bash
-   npm run test
+});
+```
+4.	Run the test:
+```bash
+npm run test
    ```
 ---
 
