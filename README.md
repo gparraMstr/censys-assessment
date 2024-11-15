@@ -85,7 +85,7 @@ A React-based web application designed for searching IPv4 hosts and displaying d
 
    1. **Stand-alone app**: As specified in the assessment requirements, this is a self-contained application which will require packaging both Frontend and Backend applications into a stand-alone application to run on Linux, MacOS and Windows. This is fully explained in the [Deployment](#deployment).
 
-	2.	**Production**: Runs both Frontend and Backend application on same `node.js` service instance on port `5001`. The backend proxy is started to handle API requests, and the Frontend application is served as a static build in this mode. The frontend application is built into compiled content and deployed to backend deployment under the `build` folder as static content.
+	2. **Production**: Runs both Frontend and Backend application on same `node.js` service instance on port `5001`. The backend proxy is started to handle API requests, and the Frontend application is served as a static build in this mode. The frontend application is built into compiled content and deployed to backend deployment under the `build` folder as static content.
  
    3. **Development**: Designed for development purposes, this mode allows developers to continue working on frontend application development with real-time code reloading. In this mode, both the frontend and backend must be run simultaneously: the backend proxy runs on port `5001`, while the frontend runs on port `3000`. This setup facilitates efficient development and testing.
 
@@ -359,14 +359,14 @@ Make sure **frontend app** has been built before running any test.
 
 ## Deployment
 
-### **To Deploy Locally**
+### **To Deploy and Run Locally**
 1. Build the frontend project:
    ```bash
    npm run build
    ```
    Make sure `backend/build` is updated.
 
-2. Start the proxy and frontend as Node.js application together from backend folder folder:
+2. Start the proxy and frontend as `Node.js` application together from backend folder folder:
    ```bash
    cd backend
    node index.js
@@ -401,7 +401,11 @@ Make sure **frontend app** has been built before running any test.
    │   ├── backend-windows/     # Stand-alone application to run on Windows
    ```
 
-4. Executing any of these files will an instance of node.js on port `5001`
+4. Executing any of these files will an instance of node.js on port `5001`:
+   ```bash
+   cd backend
+   ./backend-macos
+   ```
 
 5. Open a browser and load `http://localhost:5001` to test.
 
@@ -409,7 +413,7 @@ Make sure **frontend app** has been built before running any test.
 
 ## Environment Variables
 
-### Required Variables to defined for backend application in `backend\.env` file:
+### Required Variables to defined for backend application in `.env` file:
 - `CENSYS_API_ID`: Your API ID for Censys.
 - `CENSYS_API_SECRET`: Your API Secret for Censys.
 - `CENSYS_API_URL`: URL to Censys Search REST API endpoint.
@@ -438,4 +442,4 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## Contact
 
-For questions or issues, please reach out to [Your Name/Your Email] or create an issue on the repository.
+For questions or issues, please reach out to Gregorio Parra (parra73@gmail.com) or create an issue on the repository.
