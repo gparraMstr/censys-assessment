@@ -79,6 +79,8 @@ A React-based web application designed for searching IPv4 hosts and displaying d
 
    Now, there are three ways to run the application: production mode and development mode.
 
+   1. **Stand-alone app**: Another alternative is to package both Frontend and Backend application into a stand-alone application as explained in the [Deployment](#deployment).
+
 	1.	**Production**: As specified in the assessment requirements, this is a self-contained application that includes both the backend service and the frontend UI. It runs on port `5001`. The backend proxy is started to handle API requests, and the UI application is served as a static build. This setup is ideal for deployment in production environments.
 
    2. **Development**: Designed for development purposes, this mode allows developers to continue working on the UI application with real-time code reloading. In this mode, both the frontend and backend must be run simultaneously: the backend proxy runs on port `5001`, while the frontend runs on port `3000`. This setup facilitates efficient development and testing.
@@ -99,8 +101,6 @@ A React-based web application designed for searching IPv4 hosts and displaying d
      ```
 
    As previously indicated, the application will run at `http://localhost:3000`, and the backend proxy server will handle API requests at `http://localhost:5001`.
-
-   Another alternative is to package both Frontend and Backend application into a **stand-alone application** as explained in the [Deployment](#deployment)
 
 ---
 
