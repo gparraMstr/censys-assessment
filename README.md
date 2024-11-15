@@ -12,11 +12,12 @@ A React-based web application designed for searching IPv4 hosts and displaying d
 1. [Features](#features)
 2. [Installation](#installation)
 3. [Folder Structure](#folder-structure)
-4. [Components Overview](#components-overview)
-5. [Frontend Build Instructions](#build-instructions)
-6. [Frontend Testing](#testing)
-7. [Deployment](#deployment)
-8. [Environment Variables](#environment-variables)
+4. [Backend Implementation as a Secure Proxy](#backend-implementation-as-a-secure-proxy)
+5. [Components Overview](#components-overview)
+6. [Frontend Build Instructions](#build-instructions)
+7. [Frontend Testing](#testing)
+8. [Deployment](#deployment)
+9. [Environment Variables](#environment-variables)
 
 ---
 
@@ -92,6 +93,8 @@ A React-based web application designed for searching IPv4 hosts and displaying d
      ```bash
      cd backend
      node index.js
+     or
+     npm run start
      ```
 
    - **Frontend**:
@@ -139,6 +142,82 @@ censys-assessment/
 ├── README.md                   # Documentation
 ├── package.json                # Frontend dependencies and scripts
 ```
+
+---
+
+
+# Backend Implementation as a Secure Proxy
+
+The backend serves as a secure proxy (`Node.js`) between the frontend application and the Censys REST API. This design is implemented to enhance security by handling sensitive API credentials on the server side and ensuring they are never exposed to the client.
+
+---
+
+## Key Features of the Backend Proxy Implementation
+
+1. **Hides API Credentials**:
+   - The backend uses environment variables (`CENSYS_API_URL`, `CENSYS_API_ID` and `CENSYS_API_SECRET`) to securely store sensitive API credentials.
+   - These credentials are never sent to or accessible from the frontend, preventing potential misuse by malicious actors.
+
+2. **Centralized API Communication**:
+   - All communication with the Censys REST API is routed through the backend.
+   - This ensures that API requests and responses are sanitized and controlled by the backend, reducing the risk of direct manipulation.
+
+3. **Request Validation**:
+   - The backend can validate incoming requests from the frontend, ensuring only authorized and properly formatted requests are forwarded to the API.
+
+4. **Response Handling**:
+   - The backend processes responses from the Censys REST API, handling any errors or sanitizing data before sending it to the client.
+   - This protects the frontend from handling potentially sensitive error details.
+
+5. **CORS and Rate Limiting**:
+   - The backend can enforce Cross-Origin Resource Sharing (CORS) policies to restrict which origins can access the API proxy.
+   - Additional security layers, such as rate limiting, can be added to prevent abuse.
+
+6. **Unified Port for Client and Proxy**:
+   - In production mode, the backend serves both the proxy and the frontend UI, reducing the number of exposed ports and simplifying deployment.
+
+---
+
+## How It Works
+
+### **Environment Variables**:
+   - The credentials for the Censys REST API are stored securely in a `.env` file within the backend directory:
+     ```plaintext
+     CENSYS_API_ID=your_api_id
+     CENSYS_API_SECRET=your_api_secret
+     CENSYS_API_URL=censys_api_url
+     ```
+
+### **Proxy Route**:
+   - The backend defines an endpoint (e.g., `/api/fetchSearchResults`) that the frontend uses to send requests as sample code below shows (**actual implementation differs from this**):
+
+     ```javascript
+     app.get('/api/fetchSearchResults', async (req, res) => {
+         const { query, pageToken } = req.body;
+         try {
+             const response = await fetch('https://search.censys.io/api/v2/hosts/search', {
+                 method: 'POST',
+                 headers: {
+                     'Authorization': `Basic ${Buffer.from(`${process.env.CENSYS_API_ID}:${process.env.CENSYS_API_SECRET}`).toString('base64')}`,
+                     'Content-Type': 'application/json',
+                 },
+                 body: JSON.stringify({ query, pageToken }),
+             });
+             const data = await response.json();
+             res.json(data);
+         } catch (error) {
+             res.status(500).json({ error: error.message });
+         }
+     });
+     ```
+
+### **Frontend Communication**:
+   - The frontend sends requests to the backend proxy (`http://localhost:5001/api/fetchSearchResults`), which forwards them to the Censys REST API.
+   - The backend then processes the response and sends it back to the frontend.
+
+---
+
+This implementation enhances the overall security of the application by isolating sensitive operations on the server side while maintaining a clean and responsive frontend experience.
 
 
 ---
@@ -206,6 +285,8 @@ Make sure **frontend app** has been built before running any test.
 1. **Run Tests**
    Ensure you have unit tests set up for your components and reducer.
    ```bash
+   npm run test
+   or
    npm test
    ```
 
@@ -213,10 +294,6 @@ Make sure **frontend app** has been built before running any test.
    - Jest: Unit testing framework.
    - React Testing Library: For testing React components.
 
-3. **Run All Tests**
-   ```bash
-   npm run test
-   ```
 
 ---
 
@@ -229,11 +306,16 @@ Make sure **frontend app** has been built before running any test.
    ```
    Make sure `backend/build` is updated.
 
-2. Serve the stand-up application from backend folder folder:
+2. Start the proxy and frontend as Node.js application together from backend folder folder:
    ```bash
    cd backend
    node index.js
+   or
+   npm run start
    ```
+
+3. Open browser and load `http://localhost:5001'
+
 
 ### **To create and package a stand-alone application**
 
