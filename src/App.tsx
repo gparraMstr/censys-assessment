@@ -1,26 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+// src/App.tsx
 
-function App() {
+import React from 'react';
+import './App.css';
+import SearchPage from './components/SearchPage/SearchPage';
+
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div className="app">
+      <header className="app-header">
+        <h1>Censys Search Application</h1>
+        <p>Search for IP addresses and view protocol details.</p>
       </header>
+      <br/>
+      <main className="app-content">
+        <SearchPage />
+      </main>
+      <footer className="app-footer">
+        <p>&copy; 2024 Censys Search Application. All rights reserved.</p>
+      </footer>
     </div>
   );
-}
+};
 
 export default App;
