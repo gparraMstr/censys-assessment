@@ -390,13 +390,13 @@ src/
 
 ### Testing Libraries
 
-	1.	Jest:
-	   - A JavaScript testing framework that provides a simple API for testing.
-	   - Automatically identifies test files with .test.tsx or .test.ts extensions.
-	   - Features snapshot testing for ensuring UI consistency.
-	2.	React Testing Library:
-	   - A lightweight testing library focused on testing React components.
-	   - Encourages best practices by testing components in a manner similar to how users interact with the UI.
+1.	Jest:
+   - A JavaScript testing framework that provides a simple API for testing.
+   - Automatically identifies test files with .test.tsx or .test.ts extensions.
+   - Features snapshot testing for ensuring UI consistency.
+2.	React Testing Library:
+   - A lightweight testing library focused on testing React components.
+   - Encourages best practices by testing components in a manner similar to how users interact with the UI.
 
 
 ---
