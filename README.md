@@ -14,8 +14,8 @@ A React-based web application designed for searching IPv4 hosts and displaying d
 3. [Folder Structure](#folder-structure)
 4. [Backend Implementation as a Secure Proxy](#backend-implementation-as-a-secure-proxy)
 5. [Frontend Components and Architecture](#frontend-components-and-architecture)
-6. [Frontend Build Instructions](#build-instructions)
-7. [Frontend Testing](#testing)
+6. [Frontend Build Instructions](#frontend-build-instructions)
+7. [Frontend Testing](#frontend-testing)
 8. [Deployment](#deployment)
 9. [Environment Variables](#environment-variables)
 
@@ -312,6 +312,8 @@ The frontend of the application is built using React and TypeScript, leveraging 
 ---
 
 This architecture ensures the application remains scalable and maintainable while providing a clean and responsive user experience.
+
+---
 
 ## Frontend Build Instructions
 
