@@ -11,7 +11,7 @@ describe("searchService", () => {
     const mockJsonToUrl = jsonToUrl as jest.Mock;
 
     beforeEach(() => {
-        process.env.REACT_APP_CENSYS_API_URL = API_BASE_URL;
+        process.env.REACT_APP_CENSYS_PROXY_URL = API_BASE_URL;
         global.fetch = jest.fn();
     });
 

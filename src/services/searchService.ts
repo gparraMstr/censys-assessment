@@ -5,7 +5,7 @@ import { SearchResponse } from "../types/object-types"; // Type definition for t
 
 // Base URL for the API endpoint to fetch search results
 // Value for this URL is stored in .env file for security purposes.
-const API_BASE_URL = process.env.REACT_APP_CENSYS_API_URL || ''; // Adjust this to the actual endpoint if deployed
+const API_BASE_URL = process.env.REACT_APP_CENSYS_PROXY_URL || ''; // Adjust this to the actual endpoint if deployed
 
 /**
  * Fetches search results from the backend API.

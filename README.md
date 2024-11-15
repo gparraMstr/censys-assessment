@@ -61,7 +61,7 @@ A React-based web application designed for searching IPv4 hosts and displaying d
    - **Frontend**:
      Create a `.env` file in the root directory with the following variables:
      ```plaintext
-     REACT_APP_CENSYS_API_URL='http://localhost:5001/api/fetchSearchResults' # Backend proxy URL
+     REACT_APP_CENSYS_PROXY_URL='http://localhost:5001/api/fetchSearchResults' # Backend proxy URL
      BUILD_PATH=./backend/build                                              # Build destination folder
      ```
 
@@ -79,11 +79,11 @@ A React-based web application designed for searching IPv4 hosts and displaying d
 
    Now, there are three ways to run the application: production mode and development mode.
 
-   1. **Stand-alone app**: Another alternative is to package both Frontend and Backend application into a stand-alone application as explained in the [Deployment](#deployment).
+   1. **Stand-alone app**: As specified in the assessment requirements, this is a self-contained application which will require packaging both Frontend and Backend applications into a stand-alone application to run on Linux, MacOS and Windows. This is fully explained in the [Deployment](#deployment).
 
-	1.	**Production**: As specified in the assessment requirements, this is a self-contained application that includes both the backend service and the frontend UI. It runs on port `5001`. The backend proxy is started to handle API requests, and the UI application is served as a static build. This setup is ideal for deployment in production environments.
-
-   2. **Development**: Designed for development purposes, this mode allows developers to continue working on the UI application with real-time code reloading. In this mode, both the frontend and backend must be run simultaneously: the backend proxy runs on port `5001`, while the frontend runs on port `3000`. This setup facilitates efficient development and testing.
+	2.	**Production**: Runs both Frontend and Backend application on same node.js service instance on port `5001`. The backend proxy is started to handle API requests, and the Frontend application is served as a static build in this mode. The frontend application is built into compiled content and deployed to backend deployment under the `build` folder as static content.
+ 
+   3. **Development**: Designed for development purposes, this mode allows developers to continue working on frontend application development with real-time code reloading. In this mode, both the frontend and backend must be run simultaneously: the backend proxy runs on port `5001`, while the frontend runs on port `3000`. This setup facilitates efficient development and testing.
 
    Below are the instructions on how to start frontend and/or backend applications.
 
@@ -259,17 +259,22 @@ Make sure **frontend app** has been built before running any test.
    │   ├── backend-windows/     # Stand-alone application to run on Windows
    ```
 
+4. Executing any of these files will an instance of node.js on port `5001`
+
+5. Open a browser and load `http://localhost:5001` to test.
 
 ---
 
 ## Environment Variables
 
-### Required Variables:
-- `REACT_APP_CENSYS_API_ID`: Your API ID for Censys.
-- `REACT_APP_CENSYS_API_SECRET`: Your API Secret for Censys.
+### Required Variables to defined for backend application in `backend\.env` file:
+- `CENSYS_API_ID`: Your API ID for Censys.
+- `CENSYS_API_SECRET`: Your API Secret for Censys.
+- `CENSYS_API_URL`: URL to Censys Search REST API endpoint.
 
-### Optional Variables:
-- `BUILD_PATH`: Custom build folder path.
+### Required Variables for frontend `.env`:
+- `BUILD_PATH`: Custom build folder path under backend folder (`./backend/build`).
+- `REACT_APP_CENSYS_PROXY_URL`: URL to backend proxy
 
 ---
 
