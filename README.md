@@ -11,13 +11,14 @@ A React-based web application designed for searching IPv4 hosts and displaying d
 
 1. [Features](#features)
 2. [Installation](#installation)
-3. [Folder Structure](#folder-structure)
-4. [Backend Implementation as a Secure Proxy](#backend-implementation-as-a-secure-proxy)
-5. [Frontend Components and Architecture](#frontend-components-and-architecture)
-6. [Frontend Build Instructions](#frontend-build-instructions)
-7. [Frontend Testing](#frontend-testing)
-8. [Deployment](#deployment)
-9. [Environment Variables](#environment-variables)
+3. [Run the Application](#run-the-application)
+4. [Folder Structure](#folder-structure)
+5. [Backend Implementation as a Secure Proxy](#backend-implementation-as-a-secure-proxy)
+6. [Frontend Components and Architecture](#frontend-components-and-architecture)
+7. [Frontend Build Instructions](#frontend-build-instructions)
+8. [Frontend Testing](#frontend-testing)
+9. [Deployment](#deployment)
+10. [Environment Variables](#environment-variables)
 
 ---
 
@@ -74,7 +75,9 @@ A React-based web application designed for searching IPv4 hosts and displaying d
      CENSYS_API_URL=https://search.censys.io/api/v2/hosts/search
      ```
 
-4. **Run the Application**
+---
+
+## Run the Application
 
    First, it will be necessary to **build Frontend code** prior to running the application as indicated in the [Frontend Build Instructions](#build-instructions).
 
@@ -145,13 +148,13 @@ censys-assessment/
 ---
 
 
-# Backend Implementation as a Secure Proxy
+## Backend Implementation as a Secure Proxy
 
 The backend serves as a secure proxy (`Node.js`) between the frontend application and the Censys REST API. This design is implemented to enhance security by handling sensitive API credentials on the server side and ensuring they are never exposed to the client.
 
 ---
 
-## Key Features of the Backend Proxy Implementation
+### Key Features of the Backend Proxy Implementation
 
 1. **Hides API Credentials**:
    - The backend uses environment variables (`CENSYS_API_URL`, `CENSYS_API_ID` and `CENSYS_API_SECRET`) to securely store sensitive API credentials.
@@ -177,9 +180,9 @@ The backend serves as a secure proxy (`Node.js`) between the frontend applicatio
 
 ---
 
-## How It Works
+### How It Works
 
-### **Environment Variables**:
+#### **Environment Variables**:
    - The credentials for the Censys REST API are stored securely in a `.env` file within the backend directory:
      ```plaintext
      CENSYS_API_ID=your_api_id
@@ -187,7 +190,7 @@ The backend serves as a secure proxy (`Node.js`) between the frontend applicatio
      CENSYS_API_URL=censys_api_url
      ```
 
-### **Proxy Route**:
+#### **Proxy Route**:
    - The backend defines an endpoint (e.g., `/api/fetchSearchResults`) that the frontend uses to send requests as sample code below shows (**actual implementation differs from this**):
 
      ```javascript
@@ -210,7 +213,7 @@ The backend serves as a secure proxy (`Node.js`) between the frontend applicatio
      });
      ```
 
-### **Frontend Communication**:
+#### **Frontend Communication**:
    - The frontend sends requests to the backend proxy (`http://localhost:5001/api/fetchSearchResults`), which forwards them to the Censys REST API.
    - The backend then processes the response and sends it back to the frontend.
 
@@ -221,13 +224,13 @@ This implementation enhances the overall security of the application by isolatin
 
 ---
 
-# Frontend Components and Architecture
+## Frontend Components and Architecture
 
 The frontend of the application is built using React and TypeScript, leveraging a modular component-based architecture to ensure scalability, maintainability, and reusability. Below is an explanation of each key component and the overall structure.
 
 ---
 
-## Key Components
+### Key Components
 
 ### **1. SearchPage**
 - **Location**: `src/components/SearchPage/SearchPage.tsx`
@@ -239,7 +242,7 @@ The frontend of the application is built using React and TypeScript, leveraging 
 
 ---
 
-### **2. SearchBar**
+#### **2. SearchBar**
 - **Location**: `src/components/SearchPage/SearchBar.tsx`
 - **Description**: A controlled input field for users to enter search queries.
 - **Responsibilities**:
@@ -249,7 +252,7 @@ The frontend of the application is built using React and TypeScript, leveraging 
 
 ---
 
-### **3. ResultList**
+#### **3. ResultList**
 - **Location**: `src/components/SearchPage/ResultList.tsx`
 - **Description**: Renders a list of search results.
 - **Responsibilities**:
@@ -258,7 +261,7 @@ The frontend of the application is built using React and TypeScript, leveraging 
 
 ---
 
-### **4. ResultItem**
+#### **4. ResultItem**
 - **Location**: `src/components/SearchPage/ResultItem.tsx`
 - **Description**: Displays individual search result details, such as the IP address and associated protocols.
 - **Responsibilities**:
@@ -267,7 +270,7 @@ The frontend of the application is built using React and TypeScript, leveraging 
 
 ---
 
-### **5. LoadingSpinner**
+#### **5. LoadingSpinner**
 - **Location**: `src/components/SearchPage/LoadingSpinner.tsx`
 - **Description**: Displays a spinner when the application is loading.
 - **Responsibilities**:
@@ -275,7 +278,7 @@ The frontend of the application is built using React and TypeScript, leveraging 
 
 ---
 
-### **6. PaginationButton**
+#### **6. PaginationButton**
 - **Location**: `src/components/SearchPage/PaginationButton.tsx`
 - **Description**: A button to load the next page of results.
 - **Responsibilities**:
@@ -284,22 +287,22 @@ The frontend of the application is built using React and TypeScript, leveraging 
 
 ---
 
-### **7. State Management**
+#### **7. State Management**
 - **Reducer**: `src/reducers/searchReducer.ts`
   - Manages the application state (e.g., results, query, loading state, pagination tokens) using a reducer-based approach.
 - **Hooks**: Custom hooks like `useSearchService` abstract the logic for interacting with the backend API and provide a clean interface for components.
 
 ---
 
-## Architecture
+### Architecture
 
-### **Component-Based Design**
+#### **Component-Based Design**
 - **Modular Components**:
   - The application is divided into reusable components to promote separation of concerns and improve maintainability.
 - **State Management**:
   - Centralized state management is achieved using a reducer pattern (`searchReducer`), ensuring predictable state transitions.
 
-### **Data Flow**
+#### **Data Flow**
 1. **Frontend Interaction**:
    - Users interact with the UI through the `SearchBar` and `PaginationButton` components.
 2. **API Requests**:
