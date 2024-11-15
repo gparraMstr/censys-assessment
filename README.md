@@ -341,22 +341,133 @@ This architecture ensures the application remains scalable and maintainable whil
 
 ---
 
-## Frontend app Testing
+## Frontend Testing
 
 Make sure **frontend app** has been built before running any test.
 
-1. **Run Tests**
-   Ensure you have unit tests set up for your components and reducer.
+This application employs **Jest** and **React Testing Library** for unit testing. These tools provide a robust and efficient way to validate the behavior of components, utilities, and application logic.
+
+---
+
+### Testing Setup
+
+Unit tests are located within the frontend's `src` directory. Each test file follows the convention `ComponentName.test.tsx` or `utilName.test.ts`.
+
+---
+
+### Run Tests
+
+To execute the unit tests:
+
    ```bash
    npm run test
    or
    npm test
    ```
 
-2. **Testing Libraries**
-   - Jest: Unit testing framework.
-   - React Testing Library: For testing React components.
+This command runs all test files and provides a summary of the results, including passed and failed tests.
 
+---
+
+### Folder Structure for Tests
+
+```
+src/
+├── components/
+│   ├── SearchPage/
+│   │   ├── SearchBar.test.tsx        # Tests for SearchBar component
+│   │   ├── ResultList.test.tsx       # Tests for ResultList component
+│   │   ├── ResultItem.test.tsx       # Tests for ResultItem component
+│   │   ├── LoadingSpinner.test.tsx   # Tests for LoadingSpinner component
+│   │   ├── PaginationButton.test.tsx # Tests for PaginationButton component
+├── reducers/
+│   ├── searchReducer.test.ts         # Tests for searchReducer logic
+├── utils/
+│   ├── formatUtils.test.ts           # Tests for utility functions
+```
+
+---
+
+### Testing Libraries
+
+	1.	Jest:
+	   - A JavaScript testing framework that provides a simple API for testing.
+	   - Automatically identifies test files with .test.tsx or .test.ts extensions.
+	   - Features snapshot testing for ensuring UI consistency.
+	2.	React Testing Library:
+	   - A lightweight testing library focused on testing React components.
+	   - Encourages best practices by testing components in a manner similar to how users interact with the UI.
+
+
+---
+
+### Key Test Cases
+
+#### Components
+
+	- SearchBar:
+	   - Validates user input handling.
+	   - Ensures onSearch is triggered on form submission.
+	   - Confirms the correct behavior of the loading state.
+	- ResultList:
+	   - Ensures all results are rendered correctly.
+	   - Tests scenarios with empty results.
+	- ResultItem:
+	   - Validates the correct rendering of individual result items, including IP and protocols.
+	- PaginationButton:
+	   - Ensures the button is disabled when there are no more results or during loading.
+	   - Verifies onLoadMore is triggered on click.
+
+#### Reducer
+
+	- searchReducer:
+	   - Tests state updates for all action types (SET_LOADING, SET_RESULTS, APPEND_RESULTS, SET_QUERY).
+	   - Validates default state and error handling for unknown actions.
+
+#### Utilities
+
+	- formatUtils:
+	   - Tests formatting functions for accuracy, such as protocol count and string manipulations.
+
+
+### Writing New Tests
+
+To add a new test:
+	1.	Create a .test.tsx file alongside the component or utility to be tested.
+	2.	Import the necessary libraries:
+   ```typescript
+   import { render, screen } from '@testing-library/react';
+   import SearchBar from './SearchBar';
+   ```
+   3.	Write test cases using describe and it blocks:
+   ```typescript
+      describe('SearchBar Component', () => {
+      it('renders the input field correctly', () => {
+         render(<SearchBar onSearch={jest.fn()} isLoading={false} />);
+         const input = screen.getByRole('textbox');
+         expect(input).toBeInTheDocument();
+      });
+   });
+   ```
+   4.	Run the test:
+   ```bash
+   npm run test
+   ```
+---
+
+### Debugging Tests
+
+	- Use the `--watch` flag to run tests interactively:
+   ```bash
+   npm test -- --watch
+   ```
+
+   - Use the `--coverage` flag to generate a test coverage report:
+   ```bash
+   npm test -- --coverage
+   ```
+
+   The coverage report provides insights into which parts of the codebase are not tested.
 
 ---
 
