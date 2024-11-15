@@ -1,86 +1,113 @@
 // src/components/SearchPage/SearchPage.tsx
 
-import React, { useState } from 'react';
-import SearchBar from './SearchBar';
-import ResultList from './ResultList';
-import PaginationButton from './PaginationButton';
-import LoadingSpinner from './LoadingSpinner';
-import { fetchSearchResults, fetchNextPage } from '../../services/searchService';
-import { Result } from './types/object-types';
-import { Box } from '@mui/material';
+import React, { useReducer } from 'react';
+import SearchBar from './SearchBar'; // Component for the search input and submit button
+import ResultList from './ResultList'; // Component to display the list of results
+import PaginationButton from './PaginationButton'; // Button to load more results
+import LoadingSpinner from './LoadingSpinner'; // Spinner for loading state
+import { fetchSearchResults, fetchNextPage } from '../../services/searchService'; // API service functions
+import { Box, Typography } from '@mui/material'; // Material-UI components for layout and styling
+import { searchReducer, initialState } from '../../reducers/searchReducer'; // Import the search reducer and initial state
 
-
+/**
+ * SearchPage Component
+ * The main component that handles:
+ * - Search query submission
+ * - Displaying search results
+ * - Pagination for additional results
+ * - Loading state and error handling
+ */
 const SearchPage: React.FC = () => {
-    const [results, setResults] = useState<Result[]>([]);
-    const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [hasMoreResults, setHasMoreResults] = useState<boolean>(true);
-    const [pageToken, setPageToken] = useState<string | null>(null);
-    const [total, setTotal] = useState<number>(0);
-    const [query, setQuery] = useState<string>('')
+  // useReducer hook to manage search-related state
+  const [state, dispatch] = useReducer(searchReducer, initialState);
 
-    // Handle search submission
-    const handleSearch = async (query: string) => {
-        setIsLoading(true);
-        setResults([]);  // Clear existing results
-        setHasMoreResults(true);
-        setPageToken(null);
+  // Destructure state variables for easier usage
+  const { results, isLoading, hasMoreResults, pageToken, total, query } = state;
 
-        try {
-            if (query.trim()) {
-                setQuery(query);
-                const response = await fetchSearchResults(query);  // Perform search request
-                setResults(response.results);
-                setPageToken(response.nextPageToken);
-                setHasMoreResults(!!response.nextPageToken);
-                setTotal(response.total);
-            }
-        } catch (error) {
-            console.error("Error fetching search results:", error);
-        } finally {
-            setIsLoading(false);
-        }
-    };
+  /**
+   * Handles a new search query submission.
+   * Clears previous results and fetches the first page of new results.
+   * @param newQuery - The search query string
+   */
+  const handleSearch = async (newQuery: string) => {
+    dispatch({ type: 'SET_LOADING', payload: true }); // Start loading
+    dispatch({ type: 'SET_QUERY', payload: newQuery }); // Update the query
 
-    // Load next page of results
-    const loadMoreResults = async () => {
-        if (!pageToken) return;  // No more pages to load
+    try {
+      const response = await fetchSearchResults(newQuery); // Fetch results from the API
+      dispatch({
+        type: 'SET_RESULTS',
+        payload: {
+          results: response.results,
+          total: response.total,
+          pageToken: response.nextPageToken,
+          hasMore: !!response.nextPageToken, // Determine if more results are available
+        },
+      });
+    } catch (error) {
+      console.error('Error fetching search results:', error); // Log errors
+      dispatch({ type: 'SET_LOADING', payload: false }); // End loading
+    }
+  };
 
-        setIsLoading(true);
+  /**
+   * Loads the next page of search results.
+   * Appends new results to the existing list and updates pagination state.
+   */
+  const loadMoreResults = async () => {
+    if (!pageToken) return; // Stop if no next page token is available
 
-        try {
-            const response = await fetchNextPage(query, pageToken);  // Fetch next page of results
-            setResults((prevResults) => [...prevResults, ...response.results]);  // Append new results
-            setPageToken(response.nextPageToken);
-            setHasMoreResults(!!response.nextPageToken);
-            setTotal(response.total);
-        } catch (error) {
-            console.error("Error loading more results:", error);
-        } finally {
-            setIsLoading(false);
-        }
-    };
+    dispatch({ type: 'SET_LOADING', payload: true }); // Start loading
 
-    const areThereAnyResults = results.length > 0;
+    try {
+      const response = await fetchNextPage(query, pageToken); // Fetch the next page of results
+      dispatch({
+        type: 'APPEND_RESULTS',
+        payload: {
+          results: response.results,
+          pageToken: response.nextPageToken,
+          hasMore: !!response.nextPageToken, // Determine if more results are available
+        },
+      });
+    } catch (error) {
+      console.error('Error loading more results:', error); // Log errors
+      dispatch({ type: 'SET_LOADING', payload: false }); // End loading
+    }
+  };
 
-    return (
+  // Check if there are any results to display
+  const areThereAnyResults = results.length > 0;
+
+  return (
+    <Box sx={{ p: 2 }}>
+      {/* Search bar for user input */}
+      <SearchBar onSearch={handleSearch} isLoading={isLoading} />
+
+      {/* Conditional rendering for results or no-results message */}
+      {!areThereAnyResults && !isLoading ? (
+        <Typography variant="body1" color="text.secondary" className="result-list__no-results">
+          No results found.
+        </Typography>
+      ) : (
         <>
-            <SearchBar onSearch={handleSearch} isLoading={isLoading} />
-            {!areThereAnyResults && !isLoading ? (
-                <p className="result-list__no-results">No results found.</p>
-            ) : (
-                <>
-                    <ResultList results={results} total={total} />
-                    {isLoading && <LoadingSpinner isLoading={isLoading} />}
-                </>
-            )}
-            <br/>
-            <PaginationButton
-                onLoadMore={loadMoreResults}
-                isLoading={isLoading}
-                hasMoreResults={hasMoreResults}
-            />
+          {/* Display the list of results */}
+          <ResultList results={results} total={total} />
+
+          {/* Show loading spinner while fetching data */}
+          {isLoading && <LoadingSpinner isLoading={isLoading} />}
         </>
-    );
+      )}
+
+      {/* Pagination button to load more results */}
+      <Box sx={{ mt: 2 }}>
+        <PaginationButton
+          onLoadMore={loadMoreResults}
+          isLoading={isLoading}
+          hasMoreResults={hasMoreResults}
+        />
+      </Box>
+    </Box>
+  );
 };
 
 export default SearchPage;
