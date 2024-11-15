@@ -13,8 +13,8 @@ A React-based web application designed for searching IPv4 hosts and displaying d
 2. [Installation](#installation)
 3. [Folder Structure](#folder-structure)
 4. [Components Overview](#components-overview)
-5. [Build Instructions](#build-instructions)
-6. [Testing](#testing)
+5. [Frontend Build Instructions](#build-instructions)
+6. [Frontend Testing](#testing)
 7. [Deployment](#deployment)
 8. [Environment Variables](#environment-variables)
 
@@ -75,20 +75,7 @@ A React-based web application designed for searching IPv4 hosts and displaying d
 
 4. **Run the Application**
 
-   First, it will be necessary to build Frontend code prior to running the application.
-
-   - **Frontend**:
-     Build the frontend React application:
-     ```bash
-     npm run build
-     ```
-   Validate that `build` folder was created under `backend` folder and properly populated as follows:
-
-   ```
-   censys-assessment/
-   ├── backend/                    # Backend proxy implementation
-   │   ├── build/                  # Build folder containing compiled React UI search application
-   ```
+   First, it will be necessary to build Frontend code prior to running the application as indicated in the [Frontend Build Instructions](#build-instructions).
 
    Now, there are two ways to run the application: production mode and development mode.
 
@@ -190,28 +177,34 @@ censys-assessment/
 
 ---
 
-## Build Instructions
+## Frontend Build Instructions
 
 1. **Run the Build Command**
    ```bash
    npm run build
-   # or
-   yarn build
    ```
 
 2. **Output Directory**
-   By default, the build output is placed in the `build/` directory. If `BUILD_PATH` is specified in `.env`, it will be in the custom directory (e.g., `dist/`).
+   By default, the build output is placed in the `backend/build/` directory. The `BUILD_PATH` is specified in `.env`, it will be in the custom directory.
+  
+   Validate that folder was created and properly populated as follows:
+
+   ```
+   censys-assessment/
+   ├── backend/                    # Backend proxy implementation
+   │   ├── build/                  # Build folder containing compiled React UI search application
+   ```
 
 ---
 
-## Testing
+## Frontend app Testing
+
+Make sure **frontend app** has been built before running any test.
 
 1. **Run Tests**
    Ensure you have unit tests set up for your components and reducer.
    ```bash
    npm test
-   # or
-   yarn test
    ```
 
 2. **Testing Libraries**
