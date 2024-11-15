@@ -12,7 +12,7 @@ app.use(cors());
 require('dotenv').config();
 
 // Define the base URL for the external Censys API
-const API_BASE_URL = 'https://search.censys.io/api/v2/hosts/search';
+const API_BASE_URL = process.env.CENSYS_API_URL;
 
 // Retrieve API credentials (ID and SECRET) securely from environment variables
 const API_ID = process.env.CENSYS_API_ID;
