@@ -482,21 +482,24 @@ This application provides flexible deployment options to cater to different stag
 ## Available Deployment Methods
 
 1. **Local Deployment for Testing and Development**:  
-   This mode is suitable for local testing or active development. The backend proxy runs as a `Node.js` application, and the frontend is built and served as static files through the same instance.  
+   This mode is suitable for local testing or active development. The backend proxy runs as a `Node.js` application, and the frontend is built and served as static files through the same instance.
+
    **Steps**:
    - Build the frontend using `npm run build`.
    - Start the backend proxy and serve the frontend by running `node index.js` or `npm run start` from the `backend` directory.
    - Access the application locally at `http://localhost:5001`.
 
 2. **Standalone Application for Distribution**:  
-   This method packages the application (frontend and backend) into a single executable for easy distribution. The standalone version eliminates dependencies on external runtime environments like Node.js, making it ideal for deploying on various operating systems (Linux, MacOS, Windows).  
+   This method packages the application (frontend and backend) into a single **executable** for easy distribution. The standalone version eliminates dependencies on external runtime environments like Node.js, making it ideal for deploying on various operating systems (Linux, MacOS, Windows).  
+
    **Steps**:
    - Build the frontend if not already built using `npm run build`.
    - Package the application using `pkg .` from the `backend` directory.
    - Run the generated executable to launch the application on port `5001`.
 
 3. **Production-Ready Deployment**:  
-   In a production environment, the application can be deployed as a consolidated Node.js service. The backend proxy securely handles API calls, and the frontend is served as pre-built static files.  
+   In a production environment, the application can be deployed as a consolidated `Node.js` service. The backend proxy securely handles API calls, and the frontend is served as pre-built static files.  
+
    **Steps**:
    - Build the frontend project using `npm run build`.
    - Deploy the contents of the `backend` folder, ensuring `index.js` serves both the proxy and the static frontend files.
