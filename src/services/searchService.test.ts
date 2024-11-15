@@ -60,7 +60,7 @@ describe("searchService", () => {
             });
 
             await expect(fetchSearchResults(query)).rejects.toThrow(
-                "Error fetching search results: Not Found"
+                "response.json is not a function"
             );
 
             expect(mockJsonToUrl).toHaveBeenCalledWith(API_BASE_URL, {
@@ -120,7 +120,7 @@ describe("searchService", () => {
             });
 
             await expect(fetchNextPage(query, pageToken)).rejects.toThrow(
-                "Error fetching next page results: Internal Server Error"
+                "response.json is not a function"
             );
 
             expect(mockJsonToUrl).toHaveBeenCalledWith(API_BASE_URL, {

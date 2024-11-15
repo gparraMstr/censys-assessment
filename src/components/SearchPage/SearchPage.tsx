@@ -33,6 +33,7 @@ const SearchPage: React.FC = () => {
    * @param newQuery - The search query string
    */
   const handleSearch = async (newQuery: string) => {
+    dispatch({ type: 'CLEAR_RESULTS' }); // End loading
     dispatch({ type: 'SET_LOADING', payload: true }); // Start loading
     dispatch({ type: 'SET_QUERY', payload: newQuery }); // Update the query
 
@@ -73,8 +74,8 @@ const SearchPage: React.FC = () => {
         },
       });
     } catch (error) {
-      console.error('Error loading more results:', error); // Log errors
-      dispatch({ type: 'SET_LOADING', payload: false }); // End loading
+      dispatch({ type: 'CLEAR_RESULTS' }); // End loading
+      setErrorMsg(error instanceof Error ? error.message : 'An unknown error occurred');
     }
   };
 
