@@ -47,7 +47,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, isLoading }) => {
         // Form container for the search input and button
         <form onSubmit={handleSubmit} className="search-bar" style={{ display: 'flex'}}>
             {/* Material-UI TextField for the search input */}
-            <TextField
+            <TextField sx={{ width: '600px' }}
                 id="host-search-pattern" // Unique identifier for the input
                 size="small" // Sets the size of the input field
                 type="search" // Sets the input type to "search"
