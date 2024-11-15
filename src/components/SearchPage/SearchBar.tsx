@@ -45,7 +45,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, isLoading }) => {
 
     return (
         // Form container for the search input and button
-        <form onSubmit={handleSubmit} className="search-bar">
+        <form onSubmit={handleSubmit} className="search-bar" style={{ display: 'flex'}}>
             {/* Material-UI TextField for the search input */}
             <TextField
                 id="host-search-pattern" // Unique identifier for the input
@@ -55,9 +55,9 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, isLoading }) => {
                 autoFocus={true} // Automatically focuses the input field on render
                 value={query} // Binds the input value to the query state
             />
-
+            
             {/* Material-UI Button for submitting the search */}
-            <Button
+            <Button sx={{ marginLeft: '15px' }}
                 variant="contained" // Sets the button style to "contained"
                 startIcon={<SearchIcon />} // Adds a search icon to the button
                 type="submit" // Specifies the button type as "submit"

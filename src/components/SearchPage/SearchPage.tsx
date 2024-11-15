@@ -86,7 +86,7 @@ const SearchPage: React.FC = () => {
 
       {/* Conditional rendering for results or no-results message */}
       {!areThereAnyResults && !isLoading ? (
-        <Typography variant="body1" color="text.secondary" className="result-list__no-results">
+        <Typography variant="body1" color="text.secondary" sx={{ margin: '20px' }}>
           No results found.
         </Typography>
       ) : (
