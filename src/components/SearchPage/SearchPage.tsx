@@ -73,6 +73,7 @@ const SearchPage: React.FC = () => {
                     {isLoading && <LoadingSpinner isLoading={isLoading} />}
                 </>
             )}
+            <br/>
             <PaginationButton
                 onLoadMore={loadMoreResults}
                 isLoading={isLoading}

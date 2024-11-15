@@ -5,7 +5,7 @@ import ResultItem from './ResultItem';
 import { ResultListProps } from './types/object-types';
 import { List } from '@mui/material';
 
-const ResultList: React.FC<ResultListProps> = ({ results }) => {
+const ResultList: React.FC<ResultListProps> = React.memo(({ results }) => {
     const areThereAnyResults = results.length > 0;
 
     if (!areThereAnyResults) return (<></>);
@@ -17,6 +17,6 @@ const ResultList: React.FC<ResultListProps> = ({ results }) => {
             ))}
         </List>
     );
-};
+});
 
 export default ResultList;

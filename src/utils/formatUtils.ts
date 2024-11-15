@@ -53,3 +53,23 @@ export const formatDate = (dateStr: string): string => {
   }
   return date.toISOString().split('T')[0];
 };
+
+/**
+ * Converts a base URL and a JSON object into a URL with GET parameters.
+ *
+ * @param baseUrl - The base URL to which parameters will be appended.
+ * @param params - A JSON object representing the query parameters.
+ * @returns A string with the complete URL containing GET parameters.
+ */
+export const jsonToUrl = (baseUrl: string, params: Record<string, any>): string => {
+    const url = new URL(baseUrl);
+    
+    // Iterate over the JSON object and append each key-value pair to the URL's search params
+    Object.entries(params).forEach(([key, value]) => {
+        if (value !== undefined && value !== null) {
+            url.searchParams.append(key, String(value));
+        }
+    });
+
+    return url.toString();
+};

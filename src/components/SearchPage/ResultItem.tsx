@@ -7,7 +7,7 @@ import { Divider, ListItem, ListItemIcon, ListItemText, Stack, Typography } from
 import ComputerIcon from '@mui/icons-material/Computer';
 import { formatProtocolCount } from '../../utils/formatUtils';
 
-const ResultItem: React.FC<ResultItemProps> = ({ result }) => {
+const ResultItem: React.FC<ResultItemProps> = React.memo(({ result }) => {
     return (
         <React.Fragment>
             <ListItem className="result-item">
@@ -43,6 +43,6 @@ const ResultItem: React.FC<ResultItemProps> = ({ result }) => {
             <Divider variant="inset" component="li" />
         </React.Fragment>
     );
-};
+});
 
 export default ResultItem;
