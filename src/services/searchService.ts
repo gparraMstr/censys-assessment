@@ -1,7 +1,7 @@
 // src/services/searchService.ts
 
-import { SearchResponse } from "../types/object-types"; // Type definition for the response structure
 import { jsonToUrl } from "../utils/formatUtils"; // Utility function to convert JSON to URL with query parameters
+import { SearchResponse } from "../types/object-types"; // Type definition for the response structure
 
 // Base URL for the API endpoint to fetch search results
 // Value for this URL is stored in .env file for security purposes.

@@ -1,8 +1,8 @@
 // src/components/SearchPage/ResultItem.tsx
 
 import React from 'react';
-import { ResultItemProtocolProps } from '../../types/object-types'; // Import type definition for props
 import { Chip } from '@mui/material'; // Import Material-UI Chip component for styling and functionality
+import { ResultItemProtocolProps } from '../../types/object-types'; // Import type definition for props
 
 /**
  * ResultItemProtocol Component

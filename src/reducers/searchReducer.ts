@@ -1,6 +1,7 @@
 // src/reducers/searchReducer.ts
 
-import { Result } from '../types/object-types'; // Import type definition for search results
+import { ActionAppendResults, ActionResults, Result } from "../types/object-types"; // Import type definition for search results
+
 
 /**
  * Initial state for the search reducer.
@@ -23,8 +24,8 @@ export const initialState = {
 // Define action types for state transitions
 type Action =
   | { type: 'SET_LOADING'; payload: boolean } // Action to toggle loading state
-  | { type: 'SET_RESULTS'; payload: { results: Result[]; total: number; pageToken: string | null; hasMore: boolean } } // Action to set new results
-  | { type: 'APPEND_RESULTS'; payload: { results: Result[]; pageToken: string | null; hasMore: boolean } } // Action to append results
+  | { type: 'SET_RESULTS'; payload: ActionResults } // Action to set new results
+  | { type: 'APPEND_RESULTS'; payload: ActionAppendResults } // Action to append results
   | { type: 'SET_QUERY'; payload: string }; // Action to set the current query
 
 /**

@@ -2,8 +2,8 @@
 
 import React from 'react';
 import ResultItem from './ResultItem'; // Component to display individual results
-import { ResultListProps } from '../../types/object-types'; // Type definition for the props
 import { List } from '@mui/material'; // Material-UI List component for styling and structure
+import { ResultListProps } from '../../types/object-types'; // Type definition for the props
 
 /**
  * ResultList Component

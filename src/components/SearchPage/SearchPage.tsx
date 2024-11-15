@@ -9,6 +9,7 @@ import { fetchSearchResults, fetchNextPage } from '../../services/searchService'
 import { Box, Typography } from '@mui/material'; // Material-UI components for layout and styling
 import { searchReducer, initialState } from '../../reducers/searchReducer'; // Import the search reducer and initial state
 
+
 /**
  * SearchPage Component
  * The main component that handles:

@@ -1,11 +1,12 @@
 // src/components/SearchPage/ResultItem.tsx
 
 import React from 'react';
-import { ResultItemProps } from '../../types/object-types'; // Import type definitions for props
+
 import ResultItemProtocol from './ResultItemProtocol'; // Import the protocol rendering component
 import { Divider, ListItem, ListItemIcon, ListItemText, Stack, Typography } from '@mui/material'; // Material-UI components for styling
 import ComputerIcon from '@mui/icons-material/Computer'; // Icon for representing the result item
 import { formatProtocolCount } from '../../utils/formatUtils'; // Utility function to format protocol counts
+import { ResultItemProps } from '../../types/object-types'; // Import type definitions for props
 
 /**
  * ResultItem Component

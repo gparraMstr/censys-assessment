@@ -61,3 +61,16 @@ export interface UseSearchService {
   performSearch: (query: string) => Promise<void>;
   loadMoreResults: () => Promise<void>;
 }
+
+export interface ActionResults { 
+  results: Result[]; 
+  total: number; 
+  pageToken: string | null; 
+  hasMore: boolean 
+}
+
+export interface ActionAppendResults { 
+  results: Result[]; 
+  pageToken: string | null; 
+  hasMore: boolean 
+}

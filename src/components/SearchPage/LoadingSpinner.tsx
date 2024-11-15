@@ -1,8 +1,8 @@
 // src/components/SearchPage/LoadingSpinner.tsx
 
 import React from 'react';
-import { LoadingSpinnerProps } from '../../types/object-types'; // Import type definition for props
 import { Box, CircularProgress } from '@mui/material'; // Import Material-UI components for styling and the spinner
+import { LoadingSpinnerProps } from '../../types/object-types'; // Import type definition for props
 
 /**
  * LoadingSpinner Component

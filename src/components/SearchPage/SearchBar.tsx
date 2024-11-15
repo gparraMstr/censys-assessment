@@ -1,9 +1,10 @@
 // src/components/SearchPage/SearchBar.tsx
 
 import React, { useState, FormEvent, useCallback } from 'react'; // Import React hooks and types
-import { SearchBarProps } from '../../types/object-types'; // Import type definition for props
+
 import { Button, TextField } from '@mui/material'; // Import Material-UI components for styling
 import SearchIcon from '@mui/icons-material/Search'; // Import Material-UI icon for the search button
+import { SearchBarProps } from '../../types/object-types'; // Import type definition for props
 
 /**
  * SearchBar Component
