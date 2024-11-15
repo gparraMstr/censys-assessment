@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { LoadingSpinnerProps } from './types/object-types';
+import { Box, CircularProgress } from '@mui/material';
 
 const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ isLoading }) => {
   if (!isLoading) {
@@ -9,10 +10,9 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ isLoading }) => {
   }
 
   return (
-    <div className="loading-spinner">
-      <div className="spinner"></div>
-      <p>Loading...</p>
-    </div>
+    <Box sx={{ display: 'flex', margin: '20px' }}>
+      <CircularProgress />
+    </Box>
   );
 };
 

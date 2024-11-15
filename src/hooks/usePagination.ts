@@ -37,7 +37,7 @@ const usePagination = (): UsePaginationResult => {
     setIsLoading(true);
 
     try {
-      const response = await fetchNextPage(pageToken);
+      const response = await fetchNextPage("", pageToken);
       setResults((prevResults) => [...prevResults, ...response.results]);  // Append new results
       setPageToken(response.nextPageToken);
       setHasMoreResults(!!response.nextPageToken);

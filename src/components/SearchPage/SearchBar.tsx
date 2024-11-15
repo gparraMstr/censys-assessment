@@ -24,11 +24,11 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, isLoading }) => {
     return (
         <form onSubmit={handleSubmit} className="search-bar">
             <TextField id="host-search-pattern" size="small"
-             type="search" onChange={handleInputChange}
-        autoFocus={true} 
-               value={query}/>
+                type="search" onChange={handleInputChange}
+                autoFocus={true}
+                value={query} />
 
-            <Button variant="contained" startIcon={<SearchIcon/>} type="submit">
+            <Button variant="contained" startIcon={<SearchIcon />} type="submit">
                 {isLoading ? 'Loading...' : 'Search'}
             </Button>
         </form>

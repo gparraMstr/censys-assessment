@@ -41,8 +41,8 @@ const useSearchService = (): UseSearchService => {
     setError(null); // Clear any previous errors
 
     try {
-      const response = await fetchNextPage(pageToken);
-      setResults((prevResults) => [...prevResults, ...response.results]); // Append new results
+      const response = await fetchNextPage("", pageToken);
+      setResults([]); // Append new results
       setPageToken(response.nextPageToken);
       setHasMoreResults(!!response.nextPageToken);
     } catch (err) {
