@@ -7,6 +7,7 @@ export interface Protocol {
 export interface SearchResponse {
   results: Array<Result>;
   nextPageToken: string;  // Token for the next page, if provided by the API
+  total: number;
 }
 
 export interface Result {
@@ -25,6 +26,7 @@ export interface ResultItemProtocolProps {
 
 export interface ResultListProps {
   results: Result[];  // Array of result objects to display
+  total: number;
 }
 
 export interface LoadingSpinnerProps {

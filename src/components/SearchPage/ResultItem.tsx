@@ -5,6 +5,7 @@ import { ResultItemProps } from './types/object-types';
 import ResultItemProtocol from './ResultItemProtocol';
 import { ListItem, ListItemIcon, ListItemText, Stack, Typography } from '@mui/material';
 import ComputerIcon from '@mui/icons-material/Computer';
+import { formatProtocolCount } from '../../utils/formatUtils';
 
 const ResultItem: React.FC<ResultItemProps> = ({ result }) => {
     return (
@@ -21,7 +22,7 @@ const ResultItem: React.FC<ResultItemProps> = ({ result }) => {
                             variant="body2"
                             sx={{ color: 'text.primary', display: 'inline' }}
                         >
-                            Protocols: {result.protocols.length}
+                            {formatProtocolCount(result.protocols.length)}
                         </Typography>
                         <Stack direction="row" spacing={1} sx={{ margin: '2px 0px 0px -1px' }}>
                             {result.protocols.length > 0 ? (

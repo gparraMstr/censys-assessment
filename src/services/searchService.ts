@@ -41,7 +41,8 @@ export const fetchSearchResults = async (query: string): Promise<SearchResponse>
       } as Protocol)),
       // Map any additional fields here if needed
     })),
-    nextPageToken: data.nextPageToken
+    nextPageToken: data.nextPageToken,
+    total: data.result.total,
   };
 };
 
@@ -68,6 +69,7 @@ export const fetchNextPage = async (pageToken: string): Promise<SearchResponse> 
       protocolCount: item.protocol_count,
       // Map any additional fields here if needed
     })),
-    nextPageToken: data.nextPageToken
+    nextPageToken: data.nextPageToken,
+    total: data.results.total,
   };
 };

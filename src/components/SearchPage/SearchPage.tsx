@@ -15,6 +15,7 @@ const SearchPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [hasMoreResults, setHasMoreResults] = useState<boolean>(true);
   const [pageToken, setPageToken] = useState<string | null>(null);
+  const [total, setTotal] = useState<number>(0);
 
   // Handle search submission
   const handleSearch = async (query: string) => {
@@ -28,6 +29,7 @@ const SearchPage: React.FC = () => {
       setResults(response.results);
       setPageToken(response.nextPageToken);
       setHasMoreResults(!!response.nextPageToken);
+      setTotal(response.total);
     } catch (error) {
       console.error("Error fetching search results:", error);
     } finally {
@@ -46,6 +48,7 @@ const SearchPage: React.FC = () => {
       setResults((prevResults) => [...prevResults, ...response.results]);  // Append new results
       setPageToken(response.nextPageToken);
       setHasMoreResults(!!response.nextPageToken);
+      setTotal(response.total);
     } catch (error) {
       console.error("Error loading more results:", error);
     } finally {
@@ -57,7 +60,7 @@ const SearchPage: React.FC = () => {
     <Container maxWidth="lg">
       <SearchBar onSearch={handleSearch} isLoading={isLoading} />
       <LoadingSpinner isLoading={isLoading} />
-      <ResultList results={results} />
+      <ResultList results={results} total={total} />
       <PaginationButton 
         onLoadMore={loadMoreResults} 
         isLoading={isLoading} 
