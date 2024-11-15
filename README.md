@@ -88,9 +88,14 @@ To enhance security, the application includes a **Node.js-based secure proxy bac
    1. **Stand-alone app**: As specified in the assessment requirements, this is a self-contained application which will require packaging both Frontend and Backend applications into a stand-alone application to run on Linux, MacOS and Windows. This is fully explained in the [Deployment](#deployment) section.
 
 
-   2. **Production**: Runs both Frontend and Backend application on same node.js service instance on port `5001`. The backend proxy is started to handle API requests, and the Frontend application is served as a static build in this mode. The frontend application is built into compiled content and deployed to backend deployment under the `build` folder as static content.
- 
-   3. **Development**: Designed for development purposes, this mode allows developers to continue working on frontend application development with real-time code reloading. In this mode, both the frontend and backend must be run simultaneously: the backend proxy runs on port `5001`, while the frontend runs on port `3000`. This setup facilitates efficient development and testing.
+   2. **Production and Development**:
+   The application supports both production and development modes, each tailored for specific use cases:
+
+   - Production Mode:
+      In this mode, both the Frontend and Backend applications run on the same Node.js service instance on port 5001. The backend proxy is started to handle API requests securely, while the Frontend application is served as pre-built static files deployed under the build folder. This configuration is ideal for deployment in production environments.
+
+   - Development Mode:
+      Designed for development purposes, this mode allows developers to work on the Frontend with real-time code reloading, enabling efficient testing and debugging. In this setup, the backend proxy runs on port 5001 to handle API requests, while the Frontend runs on a separate development server on port 3000. Both services must run simultaneously for full functionality.
 
    Below are the instructions on how to start frontend and/or backend applications.
 
