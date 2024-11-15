@@ -22,11 +22,12 @@ export const initialState = {
 };
 
 // Define action types for state transitions
-type Action =
+export type Action =
   | { type: 'SET_LOADING'; payload: boolean } // Action to toggle loading state
   | { type: 'SET_RESULTS'; payload: ActionResults } // Action to set new results
   | { type: 'APPEND_RESULTS'; payload: ActionAppendResults } // Action to append results
-  | { type: 'SET_QUERY'; payload: string }; // Action to set the current query
+  | { type: 'SET_QUERY'; payload: string } // Action to set the current query
+  | { type: 'UNKNOWN_ACTION'; }; // Action to set the current query
 
 /**
  * Reducer function to manage search-related state transitions.
