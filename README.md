@@ -3,6 +3,8 @@
 
 A React-based web application designed for searching IPv4 hosts and displaying detailed protocol information. The application supports paginated results for seamless navigation and utilizes the Censys REST API for data retrieval. It features a clean and responsive interface styled with Material-UI, a modular component architecture for maintainability and scalability, and modern state management techniques for efficient performance.
 
+![Censys App](image.png)
+
 ---
 
 ## Table of Contents
