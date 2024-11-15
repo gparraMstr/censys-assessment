@@ -25,7 +25,7 @@ const ResultItem: React.FC<ResultItemProps> = React.memo(({ result }) => {
     return (
         <React.Fragment>
             {/* Main container for the result item */}
-            <ListItem className="result-item">
+            <ListItem>
                 {/* Icon representing the result item */}
                 <ListItemIcon>
                     <ComputerIcon fontSize="large" />
@@ -49,7 +49,8 @@ const ResultItem: React.FC<ResultItemProps> = React.memo(({ result }) => {
                             <Stack 
                                 direction="row" 
                                 spacing={1} 
-                                sx={{ margin: '2px 0px 0px -1px' }}
+                                sx={{ margin: '2px 0px 0px -1px', flexWrap: 'wrap' }}
+                                useFlexGap
                             >
                                 {result.protocols.length > 0 ? (
                                     result.protocols.map((protocol, index) => (

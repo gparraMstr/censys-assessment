@@ -26,7 +26,7 @@ const ResultList: React.FC<ResultListProps> = React.memo(({ results }) => {
 
     return (
         // Material-UI List component to structure the result items
-        <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+        <List sx={{ width: '99%', bgcolor: 'background.paper' }}>
             {/* Map over the results array to render each result using the ResultItem component */}
             {results.map((result, index) => (
                 <ResultItem 
