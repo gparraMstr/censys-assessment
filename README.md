@@ -357,8 +357,15 @@ The backend serves as a secure proxy (`Node.js`) between the frontend applicatio
      ```
 
 #### **Frontend Communication**:
-   - The frontend sends `GET` requests to the backend proxy (`http://localhost:5001/api/fetchSearchResults`), which forwards them to the Censys REST API (`https://search.censys.io/api/v2/hosts/search`) via `POST` requests.
-   - The backend then processes the response and sends it back to the frontend.
+Sequence flow below depicts how communication takes place:
+
+![alt text](image-1.png)
+
+1.	User Interaction: The browser sends a search query via the UI App, initiating a `GET` request to backend proxy (`http://localhost:5001/api/fetchSearchResults`).
+2.	Secure Proxy Communication: The UI App forwards the request to the Proxy, which securely translates it into a `POST` request to the Censys REST API (`https://search.censys.io/api/v2/hosts/search`), including API_SECRET and API_ID for authentication.
+3.	Data Retrieval: The Censys API responds with a JSON payload containing a list of hosts, protocols, and a cursor for pagination, which the Proxy relays back to the UI App.
+4.	Results Display: The UI App renders the results in the browser and displays a “Load More Results” button if additional pages are available.
+5.	Pagination Workflow: On clicking “Load More Results,” the UI App fetches the next page using the cursor, appends new results to the existing list, and repeats the process until all results are loaded.
 
 ---
 
