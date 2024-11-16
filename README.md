@@ -413,15 +413,13 @@ Censys Search Application
 
 ### Key Components
 
-### **1. SearchPage**
+#### **1. SearchPage**
 - **Location**: `src/components/SearchPage/SearchPage.tsx`
 - **Description**: This is the main container for the search functionality. It manages the state for the search process, including query input, results, loading state, and pagination.
 - **Responsibilities**:
   - Coordinates interactions between child components (e.g., `SearchBar`, `ResultList`).
   - Manages the application's primary state (e.g., results, loading state, pagination tokens).
   - Sends requests to the backend proxy and handles responses.
-
----
 
 #### **2. SearchBar**
 - **Location**: `src/components/SearchPage/SearchBar.tsx`
@@ -431,16 +429,12 @@ Censys Search Application
   - Triggers the `onSearch` callback when the search form is submitted.
   - Displays a loading indicator while requests are in progress.
 
----
-
 #### **3. ResultList**
 - **Location**: `src/components/SearchPage/ResultList.tsx`
 - **Description**: Renders a list of search results.
 - **Responsibilities**:
   - Iterates over the `results` array and renders each result using the `ResultItem` component.
   - Handles scenarios where no results are available.
-
----
 
 #### **4. ResultItem**
 - **Location**: `src/components/SearchPage/ResultItem.tsx`
@@ -449,15 +443,11 @@ Censys Search Application
   - Formats and displays information for a single search result.
   - Handles protocol visualization using the `ResultItemProtocol` component.
 
----
-
 #### **5. LoadingSpinner**
 - **Location**: `src/components/SearchPage/LoadingSpinner.tsx`
 - **Description**: Displays a spinner when the application is loading.
 - **Responsibilities**:
   - Provides feedback to the user during API calls.
-
----
 
 #### **6. PaginationButton**
 - **Location**: `src/components/SearchPage/PaginationButton.tsx`
@@ -465,8 +455,6 @@ Censys Search Application
 - **Responsibilities**:
   - Triggers the `onLoadMore` callback when clicked.
   - Handles the disabled state when no more results are available or a request is in progress.
-
----
 
 #### **7. State Management**
 - **Reducer**: `src/reducers/searchReducer.ts`
