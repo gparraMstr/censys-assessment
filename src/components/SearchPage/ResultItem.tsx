@@ -49,7 +49,7 @@ const ResultItem: React.FC<ResultItemProps> = React.memo(({ result }) => {
                             <Stack 
                                 direction="row" 
                                 spacing={1} 
-                                sx={{ margin: '2px 0px 0px -1px', flexWrap: 'wrap' }}
+                                sx={{ margin: '5px 0px 0px -1px', flexWrap: 'wrap' }}
                                 useFlexGap
                             >
                                 {result.protocols.length > 0 ? (
