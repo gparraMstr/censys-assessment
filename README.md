@@ -363,6 +363,54 @@ The frontend of the application is built using React and TypeScript, leveraging 
 
 ---
 
+### Component-based tree structure
+
+```
+Censys Search Application
+├── App (Root Component)
+│   ├── Header
+│   │   ├── Title
+│   │   ├── Subtitle
+│   └── MainContent
+│       ├── SearchPage (Main Container)
+│       │   ├── SearchBar
+│       │   │   ├── InputField
+│       │   │   ├── SubmitButton
+│       │   ├── ResultList
+│       │   │   ├── ResultItem (Individual Result)
+│       │   │   │   ├── ResultItemProtocol (Protocol Chip)
+│       │   ├── PaginationButton
+│       │   ├── LoadingSpinner
+│       │   ├── ErrorMessage
+│   └── Footer
+│       ├── CopyrightNotice
+│       ├── ExternalLinks
+```
+---
+
+#### Details for Each Component
+
+1.	App: The root component that manages the overall layout of the application.
+   - Header: Contains the application’s title and subtitle.
+      - Title: Displays the name of the application.
+      - Subtitle: Provides a brief description or purpose of the app.
+   - MainContent: Wraps the core functionality provided by SearchPage.
+2.	SearchPage: The central component handling search, results, and pagination.
+   - SearchBar: Manages user input and search query submission.
+      - InputField: Text input for users to enter search queries.
+      - SubmitButton: Button to initiate the search.
+   - ResultList: Displays the search results.
+      - ResultItem: Represents an individual search result.
+         - ResultItemProtocol: Displays protocol details (e.g., HTTP, HTTPS) for the result as a styled chip.
+   - PaginationButton: Allows users to load additional results.
+   - LoadingSpinner: Indicates when data is being fetched from the backend.
+   - ErrorMessage: Displays error messages if API calls fail.
+3.	Footer: The footer of the application.
+   - CopyrightNotice: Displays copyright information.
+   - ExternalLinks: Links to external resources, such as documentation or API references.
+
+---
+
 ### Key Components
 
 ### **1. SearchPage**
