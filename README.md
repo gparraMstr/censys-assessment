@@ -69,7 +69,7 @@ Environment variables are explained in more details in following section [Enviro
    - **Frontend**:
      Create a `.env` file in the root directory with the following variables:
      ```plaintext
-     REACT_APP_CENSYS_PROXY_URL='http://localhost:5001/api/fetchSearchResults' # Backend proxy URL
+     REACT_APP_CENSYS_PROXY_URL=http://localhost:5001/api/fetchSearchResults # Backend proxy URL
      BUILD_PATH=./backend/build                                              # Build destination folder
      ```
 
