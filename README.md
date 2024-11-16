@@ -119,12 +119,14 @@ The frontend requires the following variables to configure the build path and co
 
 These instructions are meant to compile the frontend application.
 
-1. **Run the Build Command**
+1. **Switch back to frontend parent folder** from `backend` folder if not done yet.
+
+2. **Run the Build Command** on frontend folder
    ```bash
    npm run build
    ```
 
-2. **Output Directory**
+3. **Output Directory**
    By default, the build output is placed in the `backend/build/` directory. The `BUILD_PATH` is specified in `.env`, it will be in the custom directory.
   
    Validate that folder was created and properly populated as follows:
@@ -160,17 +162,19 @@ These instructions are meant to compile the frontend application.
 
 ### How to Run
 
-#### Production mode
+#### Production mode (Recommended)
 - **Backend**:
-   Start the backend proxy service which also serves the UI app as static content:
-   ```bash
-   cd backend
-   node index.js
-   or
-   npm run start
-   ```
+   - Start the backend proxy service which also serves the UI app as static content:
+      ```bash
+      cd backend
+      node index.js
+      or
+      npm run start
+      ```
 
-These commands will start the backend proxy server and the frontend applications on `5001` port.
+- These commands will start the backend proxy server and the frontend applications on `5001` port.
+- Open browser and follow manual testing instructions in [How to Test](#how-to-test) section.
+
 
 #### Development mode
 Below are the instructions on how to start frontend and/or backend applications.
@@ -191,7 +195,8 @@ Below are the instructions on how to start frontend and/or backend applications.
    npm run start
    ```
 
-As previously indicated, the application will run at `http://localhost:3000`, and the backend proxy server will handle API requests at `http://localhost:5001`.
+- As previously indicated, the application will run at `http://localhost:3000`, and the backend proxy server will handle API requests at `http://localhost:5001`.
+- Open browser and follow manual testing instructions in [How to Test](#how-to-test) section below.
 
 ---
 ---
