@@ -13,16 +13,17 @@ To enhance security, the application includes a **Node.js-based secure proxy bac
 ## Table of Contents
 
 1. [Features](#features)
-2. [Installation](#installation)
-3. [Environment Variables](#environment-variables)
-4. [Build Instructions](#build-instructions)
-5. [Run the Application](#run-the-application)
-6. [How to Test](#how-to-test)
-7. [Folder Structure](#folder-structure)
-8. [Backend Implementation as a Secure Proxy](#backend-implementation-as-a-secure-proxy)
-9. [Frontend Components and Architecture](#frontend-components-and-architecture)
-10. [Unit Testing](#unit-testing)
-11. [Deployment](#deployment)
+2. [Prerequisites](#prerequisites)
+3. [Installation](#installation)
+4. [Environment Variables](#environment-variables)
+5. [Build Instructions](#build-instructions)
+6. [Run the Application](#run-the-application)
+7. [How to Test](#how-to-test)
+8. [Folder Structure](#folder-structure)
+9. [Backend Implementation as a Secure Proxy](#backend-implementation-as-a-secure-proxy)
+10. [Frontend Components and Architecture](#frontend-components-and-architecture)
+11. [Unit Testing](#unit-testing)
+12. [Deployment](#deployment)
 
 ---
 ---
@@ -36,6 +37,25 @@ To enhance security, the application includes a **Node.js-based secure proxy bac
 - **Modular Component Architecture**: Features a scalable and reusable component-based design for maintainability and future enhancements.
 - **Modern UI with Dynamic Feedback**: Styled with Material-UI to deliver a responsive, accessible, and visually appealing interface, featuring a dynamic loading spinner to provide real-time feedback during API calls.
 - **Built with React and TypeScript**: Leverages modern web development technologies for strong typing, maintainability, and efficient performance.
+
+---
+---
+
+## Prerequisites
+
+1. Before setting up or running the application, ensure the following requirements are met:
+	- `Node.js`: Version 18.15.x or later. [Download Node](https://nodejs.org/en)
+   - `npm`: Version 9.x or later (comes bundled with Node.js)
+
+2. Dependencies:
+	- `pkg`: For packaging the application into standalone executables. Install globally with:
+      ```bash
+      npm install -g pkg
+      ```
+
+3. Operating System: Compatible with Linux, MacOS, or Windows
+4. Access to **Censys REST API**: 
+   - A valid API ID and API Secret for the Censys REST API.
 
 ---
 ---
@@ -210,10 +230,10 @@ Below are the instructions on how to start frontend and/or backend applications.
 2.	Manual Testing:
 - Run both frontend and backend proxy apps in either Production or Development as previously described.
 - Open a browser and load either `http://localhost:5001` (production) or `http://localhost:3000` (development) 
-- Enter a valid query text in `Search textfield`
-- Click on `Search` button
+- Enter a valid query text in **Search textfield** like this: `services.http.response.headers.location=/.*(\.\.\/)+.*(\.asp|\.php|\.js|\.cgi).*/`
+- Click on **Search** button
 - Wait for data to load
-- Scroll down and click `Load More Results` button
+- Scroll down and click **Load More Results** button
 - New data should be appended.
 
 ---
