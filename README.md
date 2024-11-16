@@ -44,11 +44,12 @@ To enhance security, the application includes a **Node.js-based secure proxy bac
 ## Prerequisites
 
 1. Before setting up or running the application, ensure the following requirements are met:
-	- `Node.js`: Version 18.15.x or later. [Download Node](https://nodejs.org/en)
-   - `npm`: Version 9.x or later (comes bundled with Node.js)
+	- `Node.js`: Install version 18.15.x or later. [Download Node](https://nodejs.org/en)
+   - `npm`: Must be version 9.x or later (comes bundled with Node.js)
 
-2. Dependencies:
+2. Install dependencies:
 	- `pkg`: For packaging the application into standalone executables. Install globally with:
+
       ```bash
       npm install -g pkg
       ```
