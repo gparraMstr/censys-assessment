@@ -297,15 +297,15 @@ censys-assessment/
 The development of this application was guided by the following principles and considerations:
 
 1.	**Security First**:
-      - A Node.js backend proxy was implemented to safeguard sensitive API credentials (e.g., API ID and secret). This design ensures secure communication between the UI and the Censys REST API, preventing direct exposure of credentials in the client-side application.
+      - A `Node.js` backend proxy was implemented to safeguard sensitive API credentials (e.g., API ID and secret). This design ensures secure communication between the UI and the **Censys REST API**, preventing direct exposure of credentials in the client-side application.
 
 2.	**Modularity and Maintainability**:
-      - The frontend is built with a component-based architecture, making the application modular and easier to maintain.
-      - Components such as SearchBar, ResultList, and PaginationButton were designed to encapsulate specific responsibilities, ensuring reusability and separation of concerns.
+      - The frontend is built with a **component-based architecture**, making the application modular and easier to maintain.
+      - Components such as `SearchBar`, `ResultList`, and `PaginationButton` were designed to encapsulate specific responsibilities, ensuring reusability and separation of concerns.
 
 3.	**Scalability**:
-      - State management uses a reducer pattern (searchReducer) to provide centralized and predictable state transitions. This approach ensures that the application can scale easily if new features or additional complexity are introduced.
-      - Design choices like lazy loading for pagination and a responsive UI with Material-UI prioritize scalability and performance.
+      - State management uses a reducer pattern (`searchReducer`) to provide centralized and predictable state transitions. This approach ensures that the application can scale easily if new features or additional complexity are introduced.
+      - Design choices like lazy loading for pagination and a responsive UI with **Material-UI** prioritize scalability and performance.
 
 4.	**Testing and Quality Assurance**:
       - Unit tests cover critical components and utility functions to validate functionality and prevent regressions.
@@ -316,11 +316,11 @@ The development of this application was guided by the following principles and c
 
 6.	**Time Constraints and Future Enhancements**:
       - Due to the time constraints of this assessment, certain features and improvements were noted for future consideration, such as:
-      - End-to-end testing automation using tools like WebdriverIO.
+      - End-to-end testing automation using tools like `WebdriverIO`.
       - Implementing sorting and page size options in the UI.
       - Enhancing error handling to provide more detailed and user-friendly messages.
       - Optimizing performance for handling large datasets.
-      -Ensuring full accessibility compliance (e.g., ARIA labels, keyboard navigation).
+      - More details in [Technical Debts](#technical-debts) section.
 
 This approach balances delivering a functional and secure application while laying the groundwork for future scalability, usability, and quality improvements.
 
