@@ -63,6 +63,8 @@ To enhance security, the application includes a **Node.js-based secure proxy bac
 
 ## Installation
 
+First, validate **prerequisites** above are met before proceeding with installation.
+
 1. **Clone the Repository**
    ```bash
    git clone https://github.com/gparraMstr/censys-assessment.git
