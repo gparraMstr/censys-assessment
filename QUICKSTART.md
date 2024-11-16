@@ -48,7 +48,8 @@ BUILD_PATH=./backend/build
 ```
 
 ### **Backend `.env`**
-In the `backend` directory, create a `.env` file with:
+In the `backend` directory, create a `.env` file as shown below. The values for `CENSYS_API_ID` and `CENSYS_API_SECRET` variables are obtained as indicated in [Prerequisites](./README.md#prerequisites) section.
+
 ```plaintext
 CENSYS_API_ID=your_api_id
 CENSYS_API_SECRET=your_api_secret

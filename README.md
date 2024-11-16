@@ -66,9 +66,9 @@ For a concise guide to quickly start and manually test the application, please r
       npm install -g pkg
       ```
 
-3. Operating System: Compatible with Linux, MacOS, or Windows
-4. Access to **Censys REST API**: 
-   - A valid API ID and API Secret for the Censys REST API.
+3. Operating System: Compatible with Linux, MacOS, or Windows supported by Node.js v18.5.x or higher
+4. Access to **Censys Search REST API**: 
+   - A valid API ID and API Secret for the Censys Search REST API is required, which can be obtained at https://search.censys.io/account/api 
 
 ---
 ---
@@ -99,7 +99,7 @@ First, validate **prerequisites** above are met before proceeding with installat
      ```
 
 3. **Set Up Environment Variables**
-Environment variables are explained in more details in following section [Environment Variables](#environment-variables). Below, a quick set of instructions are laid out for setting up these variables.
+Environment variables are explained in more details in following section [Environment Variables](#environment-variables). Below, a quick set of instructions are laid out for setting up these variables. Backend's `.env` values for `CENSYS_API_ID` and `CENSYS_API_SECRET` variables are obtained as indicated in [Prerequisites](#prerequisites) section.
 
    - **Frontend**:
      Create a `.env` file in the root directory with the following variables:
@@ -109,7 +109,7 @@ Environment variables are explained in more details in following section [Enviro
      ```
 
    - **Backend**:
-     Create a `.env` file in the `backend` folder with the following variables:
+     Create a `.env` file in the `backend` folder with the following variables below:
      ```plaintext
      CENSYS_API_ID=your_api_id
      CENSYS_API_SECRET=your_api_secret
@@ -182,7 +182,7 @@ These instructions are meant to compile the frontend application.
 
    Now, there are two ways to run the application: stand-alone app and production and development mode.
 
-   1. **Stand-alone app**: As specified in the assessment requirements, this is a self-contained application which will require packaging both Frontend and Backend applications into a stand-alone application to run on Linux, MacOS and Windows. To get the stand-alone app, it is necessary to successfully configure and build the frontend app and this is fully explained in the [Deployment](#deployment) section.
+   1. **Stand-alone app**: As specified in the assessment requirements, this is a self-contained application which will require packaging both Frontend and Backend applications into a stand-alone application to run on either Linux, MacOS and Windows. To get the stand-alone app, it is necessary to successfully configure and build the frontend app and this is fully explained in the [Deployment](#deployment) section.
 
 
    2. **Production and Development**:
@@ -316,10 +316,10 @@ The development of this application was guided by the following principles and c
 
 6.	**Time Constraints and Future Enhancements**:
       - Due to the time constraints of this assessment, certain features and improvements were noted for future consideration, such as:
-      - End-to-end testing automation using tools like `WebdriverIO`.
-      - Implementing sorting and page size options in the UI.
-      - Enhancing error handling to provide more detailed and user-friendly messages.
-      - Optimizing performance for handling large datasets.
+         - End-to-end testing automation using tools like `WebdriverIO`.
+         - Implementing sorting and page size options in the UI.
+         - Enhancing error handling to provide more detailed and user-friendly messages.
+         - Optimizing performance for handling large datasets.
       - More details in [Technical Debts](#technical-debts) section.
 
 This approach balances delivering a functional and secure application while laying the groundwork for future scalability, usability, and quality improvements.
@@ -340,7 +340,7 @@ The backend serves as a secure proxy (`Node.js`) between the frontend applicatio
    - These credentials are never sent to or accessible from the frontend, preventing potential misuse by malicious actors.
 
 2. **Centralized API Communication**:
-   - All communication with the Censys REST API is routed through the backend.
+   - All communication with the Censys Search REST API is routed through the backend.
    - This ensures that API requests and responses are sanitized and controlled by the backend, reducing the risk of direct manipulation.
 
 3. **Request Validation**:
@@ -362,7 +362,7 @@ The backend serves as a secure proxy (`Node.js`) between the frontend applicatio
 ### How It Works
 
 #### **Environment Variables**:
-   - The credentials for the Censys REST API are stored securely in a `.env` file within the backend directory:
+   - The credentials for the Censys Search REST API are stored securely in a `.env` file within the backend directory:
      ```plaintext
      CENSYS_API_ID=your_api_id
      CENSYS_API_SECRET=your_api_secret
@@ -376,7 +376,7 @@ The backend serves as a secure proxy (`Node.js`) between the frontend applicatio
      app.get('/api/fetchSearchResults', async (req, res) => {
          const { query, pageToken } = req.body;
          try {
-             const response = await fetch('https://search.censys.io/api/v2/hosts/search', {
+             const response = await fetch(process.env.CENSYS_API_URL, {
                  method: 'POST',
                  headers: {
                      'Authorization': `Basic ${Buffer.from(`${process.env.CENSYS_API_ID}:${process.env.CENSYS_API_SECRET}`).toString('base64')}`,
@@ -398,7 +398,7 @@ Sequence flow below depicts how communication takes place:
 ![alt text](image-1.png)
 
 1.	User Interaction: The browser sends a search query via the UI App, initiating a `GET` request to backend proxy (`http://localhost:5001/api/fetchSearchResults`).
-2.	Secure Proxy Communication: The UI App forwards the request to the Proxy, which securely translates it into a `POST` request to the Censys REST API (`https://search.censys.io/api/v2/hosts/search`), including API_SECRET and API_ID for authentication.
+2.	Secure Proxy Communication: The UI App forwards the request to the Proxy, which securely translates it into a `POST` request to the Censys Search REST API (`https://search.censys.io/api/v2/hosts/search`), including API_SECRET and API_ID for authentication.
 3.	Data Retrieval: The Censys API responds with a JSON payload containing a list of hosts, protocols, and a cursor for pagination, which the Proxy relays back to the UI App.
 4.	Results Display: The UI App renders the results in the browser and displays a “Load More Results” button if additional pages are available.
 5.	Pagination Workflow: On clicking “Load More Results,” the UI App fetches the next page using the cursor, appends new results to the existing list, and repeats the process until all results are loaded.
