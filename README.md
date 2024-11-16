@@ -323,7 +323,7 @@ The backend serves as a secure proxy (`Node.js`) between the frontend applicatio
      ```
 
 #### **Proxy Route**:
-   - The backend defines an endpoint (e.g., `/api/fetchSearchResults`) that the frontend uses to send requests as sample code below shows (**actual implementation differs from this**):
+   - The backend defines an endpoint (e.g., `GET /api/fetchSearchResults`) that the frontend uses to send requests as sample code below shows (**actual implementation differs from this**):
 
      ```javascript
      app.get('/api/fetchSearchResults', async (req, res) => {
@@ -346,7 +346,7 @@ The backend serves as a secure proxy (`Node.js`) between the frontend applicatio
      ```
 
 #### **Frontend Communication**:
-   - The frontend sends requests to the backend proxy (`http://localhost:5001/api/fetchSearchResults`), which forwards them to the Censys REST API.
+   - The frontend sends `GET` requests to the backend proxy (`http://localhost:5001/api/fetchSearchResults`), which forwards them to the Censys REST API (`https://search.censys.io/api/v2/hosts/search`) via `POST` requests.
    - The backend then processes the response and sends it back to the frontend.
 
 ---
@@ -438,7 +438,7 @@ The frontend of the application is built using React and TypeScript, leveraging 
 1. **Frontend Interaction**:
    - Users interact with the UI through the `SearchBar` and `PaginationButton` components.
 2. **API Requests**:
-   - Requests are sent to the backend proxy via the `searchService`.
+   - `GET` requests are sent to the backend proxy via the `searchService`.
 3. **State Updates**:
    - Responses are processed and the state is updated using the reducer.
 4. **Rendering**:
