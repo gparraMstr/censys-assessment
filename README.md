@@ -488,8 +488,10 @@ src/
 │   │   ├── SearchBar.test.tsx        # Tests for SearchBar component
 │   │   ├── ResultList.test.tsx       # Tests for ResultList component
 │   │   ├── ResultItem.test.tsx       # Tests for ResultItem component
+│   │   ├── ResultItemProtocol.test.tsx  # Tests for ResultItemProtocol component
 │   │   ├── LoadingSpinner.test.tsx   # Tests for LoadingSpinner component
 │   │   ├── PaginationButton.test.tsx # Tests for PaginationButton component
+│   │   ├── SearchPage.test.tsx       # Tests for SearchPage component
 ├── reducers/
 │   ├── searchReducer.test.ts         # Tests for searchReducer logic
 ├── utils/
