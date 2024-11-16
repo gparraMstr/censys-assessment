@@ -64,6 +64,7 @@ To enhance security, the application includes a **Node.js-based secure proxy bac
      ```
 
 3. **Set Up Environment Variables**
+Environment variables are explained in more details in following section [Environment Variables](#environment-variables). Below, a quick set of instructions are laid out for setting up these variables.
 
    - **Frontend**:
      Create a `.env` file in the root directory with the following variables:
