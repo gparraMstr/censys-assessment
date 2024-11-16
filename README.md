@@ -8,20 +8,23 @@ To enhance security, the application includes a **Node.js-based secure proxy bac
 ![Censys App](image.png)
 
 ---
+---
 
 ## Table of Contents
 
 1. [Features](#features)
 2. [Installation](#installation)
-3. [Run the Application](#run-the-application)
-4. [Folder Structure](#folder-structure)
-5. [Backend Implementation as a Secure Proxy](#backend-implementation-as-a-secure-proxy)
-6. [Frontend Components and Architecture](#frontend-components-and-architecture)
-7. [Frontend Build Instructions](#frontend-build-instructions)
-8. [Frontend Testing](#frontend-testing)
-9. [Deployment](#deployment)
-10. [Environment Variables](#environment-variables)
+3. [Environment Variables](#environment-variables)
+4. [Build Instructions](#build-instructions)
+5. [Run the Application](#run-the-application)
+6. [How to Test](#how-to-test)
+7. [Folder Structure](#folder-structure)
+8. [Backend Implementation as a Secure Proxy](#backend-implementation-as-a-secure-proxy)
+9. [Frontend Components and Architecture](#frontend-components-and-architecture)
+10. [Unit Testing](#unit-testing)
+11. [Deployment](#deployment)
 
+---
 ---
 
 ## Features
@@ -35,7 +38,7 @@ To enhance security, the application includes a **Node.js-based secure proxy bac
 - **Built with React and TypeScript**: Leverages modern web development technologies for strong typing, maintainability, and efficient performance.
 
 ---
-
+---
 
 ## Installation
 
@@ -78,14 +81,70 @@ To enhance security, the application includes a **Node.js-based secure proxy bac
      ```
 
 ---
+---
+
+## Environment Variables
+
+To ensure secure and seamless configuration, the application relies on environment variables for both the frontend and backend. These variables allow sensitive information, such as API credentials, to be stored securely and enable customization for different environments (e.g., development, testing, production).
+
+Each environment variable should be defined in the respective `.env`` files for the frontend and backend folders, ensuring proper integration and functionality. 
+
+```
+censys-assessment/
+├── backend/      # Backend proxy implementation
+│   ├── .env      # Backend environment variables file
+├── .env          # Frontend environment variables file
+```
+
+Below are the required environment variables for each part of the application:
+
+### Backend Environment Variables
+
+The backend requires the following variables to securely interact with the Censys REST API:
+- `CENSYS_API_ID`: Your unique API ID for Censys.
+- `CENSYS_API_SECRET`: Your secret key for Censys API authentication.
+- `CENSYS_API_URL`: The endpoint URL for the Censys Search REST API.
+
+### Frontend Environment Variables
+
+The frontend requires the following variables to configure the build path and communicate with the backend proxy:
+- `BUILD_PATH`: Specifies the path for the compiled frontend build folder, typically set to `./backend/build`.
+- `REACT_APP_CENSYS_PROXY_URL`: The URL of the backend proxy for secure API requests.
+
+
+---
+---
+
+## Build Instructions
+
+These instructions are meant to compile the frontend application.
+
+1. **Run the Build Command**
+   ```bash
+   npm run build
+   ```
+
+2. **Output Directory**
+   By default, the build output is placed in the `backend/build/` directory. The `BUILD_PATH` is specified in `.env`, it will be in the custom directory.
+  
+   Validate that folder was created and properly populated as follows:
+
+   ```
+   censys-assessment/
+   ├── backend/         # Backend proxy implementation
+   │   ├── build/       # Build folder containing compiled React UI search application
+   ```
+
+---
+---
 
 ## Run the Application
 
-   First, it will be necessary to **build Frontend code** prior to running the application as indicated in the [Frontend Build Instructions](#build-instructions).
+   First, it will be necessary to **build Frontend code** prior to running the application as previously indicated in the [Build Instructions](#build-instructions) section above.
 
-   Now, there are three ways to run the application: production mode and development mode.
+   Now, there are two ways to run the application: stand-alone app and production and development mode.
 
-   1. **Stand-alone app**: As specified in the assessment requirements, this is a self-contained application which will require packaging both Frontend and Backend applications into a stand-alone application to run on Linux, MacOS and Windows. This is fully explained in the [Deployment](#deployment) section.
+   1. **Stand-alone app**: As specified in the assessment requirements, this is a self-contained application which will require packaging both Frontend and Backend applications into a stand-alone application to run on Linux, MacOS and Windows. To get the stand-alone app, it is necessary to successfully configure and build the frontend app and this is fully explained in the [Deployment](#deployment) section.
 
 
    2. **Production and Development**:
@@ -97,64 +156,100 @@ To enhance security, the application includes a **Node.js-based secure proxy bac
    - Development Mode:
       Designed for development purposes, this mode allows developers to work on the Frontend with real-time code reloading, enabling efficient testing and debugging. In this setup, the backend proxy runs on port `5001` to handle API requests, while the Frontend runs on a separate development server on port `3000`. Both services must run simultaneously for full functionality.
 
-   Below are the instructions on how to start frontend and/or backend applications.
+---
 
-   - **Backend**:
-     Start the backend proxy service which also serves the UI app as static content:
-     ```bash
-     cd backend
-     node index.js
-     or
-     npm run start
-     ```
+### How to Run
 
-   - **Frontend**:
-     Start the frontend React application in dev mode and also requires the backend to be running to use proxy:
-     ```bash
-     npm run start
-     ```
+#### Production mode
+- **Backend**:
+   Start the backend proxy service which also serves the UI app as static content:
+   ```bash
+   cd backend
+   node index.js
+   or
+   npm run start
+   ```
 
-   As previously indicated, the application will run at `http://localhost:3000`, and the backend proxy server will handle API requests at `http://localhost:5001`.
+These commands will start the backend proxy server and the frontend applications on `5001` port.
 
+#### Development mode
+Below are the instructions on how to start frontend and/or backend applications.
+
+- **Frontend**:
+   Start the frontend React application in dev mode and also requires the backend to be running to use proxy:
+   ```bash
+   npm run build
+   npm run start
+   ```
+
+- **Backend**:
+   Start the backend proxy service which also serves the UI app as static content:
+   ```bash
+   cd backend
+   node index.js
+   or
+   npm run start
+   ```
+
+As previously indicated, the application will run at `http://localhost:3000`, and the backend proxy server will handle API requests at `http://localhost:5001`.
+
+---
+---
+
+## How to Test
+
+1.	Unit Testing:
+- Review [Unit Testing](#unit-testing) for more details on how to run unit testing.
+
+2.	Manual Testing:
+- Run both frontend and backend proxy apps in either Production or Development as previously described.
+- Open a browser and load either `http://localhost:5001` (production) or `http://localhost:3000` (development) 
+- Enter a valid query text in `Search textfield`
+- Click on `Search` button
+- Wait for data to load
+- Scroll down and click `Load More Results` button
+- New data should be appended.
+
+---
 ---
 
 ## Folder Structure
 
 ```
 censys-assessment/
-├── public/                     # Static assets
-├── src/                        # Frontend source code
-│   ├── components/             # Reusable React components
-│   │   ├── SearchPage/         # Main search page components
-│   │   │   ├── SearchPage.tsx  # Main container for search functionality
-│   │   │   ├── SearchBar.tsx   # Search input and submit button
-│   │   │   ├── ResultList.tsx  # List to display hosts results
-│   │   │   ├── ResultItem.tsx  # Component for individual host result
-│   │   │   ├── ResultItemProtocol.tsx  # Component for host's protocol results
-│   │   │   ├── LoadingSpinner.tsx # Loading indicator
-│   │   │   ├── PaginationButton.tsx # Button for loading more results
-│   │   └── types/              # TypeScript type definitions
-│   ├── reducers/               # Reducer functions for state management
-│   │   ├── searchReducer.ts    # Reducer for search-related state
-│   ├── services/               # API service functions for frontend
-│   │   ├── searchService.ts    # Handles API requests to the backend proxy
-│   ├── utils/                  # Utility functions
-│   │   ├── formatUtils.ts      # Functions for formatting
-│   ├── App.tsx                 # Root component
-│   ├── index.tsx               # Entry point for the application
-│   ├── App.css                 # Global styles
-├── backend/                    # Backend proxy implementation
-│   ├── build                   # Folder containing compiled Frontend application
-│   ├── index.js                # Main server file for the Node.js proxy
-│   ├── package.json            # Backend dependencies and scripts
-│   ├── .env                    # Backend environment variables
-│   └── README.md               # Documentation for the backend
-├── .env                        # Frontend environment variables
-├── package.json                # Frontend dependencies and scripts
+├── public/                               # Static assets
+├── src/                                  # Frontend source code
+│   ├── components/                       # Reusable React components
+│   │   ├── SearchPage/                   # Main search page components
+│   │   │   ├── SearchPage.tsx            # Main container for search functionality
+│   │   │   ├── SearchBar.tsx             # Search input and submit button
+│   │   │   ├── ResultList.tsx            # List to display hosts results
+│   │   │   ├── ResultItem.tsx            # Component for individual host result
+│   │   │   ├── ResultItemProtocol.tsx    # Component for host's protocol results
+│   │   │   ├── LoadingSpinner.tsx        # Loading indicator
+│   │   │   ├── PaginationButton.tsx      # Button for loading more results
+│   │   └── types/                        # TypeScript type definitions
+│   ├── reducers/                         # Reducer functions for state management
+│   │   ├── searchReducer.ts              # Reducer for search-related state
+│   ├── services/                         # API service functions for frontend
+│   │   ├── searchService.ts              # Handles API requests to the backend proxy
+│   ├── utils/                            # Utility functions
+│   │   ├── formatUtils.ts                # Functions for formatting
+│   ├── App.tsx                           # Root component
+│   ├── index.tsx                         # Entry point for the application
+│   ├── App.css                           # Global styles
+├── backend/                              # Backend proxy implementation
+│   ├── build                             # Folder containing compiled Frontend application
+│   ├── index.js                          # Main server file for the Node.js proxy
+│   ├── package.json                      # Backend dependencies and scripts
+│   ├── .env                              # Backend environment variables
+│   └── README.md                         # Documentation for the backend
+├── .env                                  # Frontend environment variables
+├── package.json                          # Frontend dependencies and scripts
 ```
 
 ---
-
+---
 
 ## Backend Implementation as a Secure Proxy
 
@@ -229,7 +324,7 @@ The backend serves as a secure proxy (`Node.js`) between the frontend applicatio
 
 This implementation enhances the overall security of the application by isolating sensitive operations on the server side while maintaining a clean and responsive frontend experience.
 
-
+---
 ---
 
 ## Frontend Components and Architecture
@@ -325,28 +420,9 @@ The frontend of the application is built using React and TypeScript, leveraging 
 This architecture ensures the application remains scalable and maintainable while providing a clean and responsive user experience.
 
 ---
-
-## Frontend Build Instructions
-
-1. **Run the Build Command**
-   ```bash
-   npm run build
-   ```
-
-2. **Output Directory**
-   By default, the build output is placed in the `backend/build/` directory. The `BUILD_PATH` is specified in `.env`, it will be in the custom directory.
-  
-   Validate that folder was created and properly populated as follows:
-
-   ```
-   censys-assessment/
-   ├── backend/         # Backend proxy implementation
-   │   ├── build/       # Build folder containing compiled React UI search application
-   ```
-
 ---
 
-## Frontend Testing
+## Unit Testing
 
 Make sure **frontend app** has been built before running any test.
 
@@ -477,14 +553,15 @@ npm test -- --coverage
 The coverage report provides insights into which parts of the codebase are not tested.
 
 ---
+---
 
-# Deployment
+## Deployment
 
 This application provides flexible deployment options to cater to different stages of the development lifecycle and production use cases. Whether running locally for testing or packaging as a standalone executable (assessment requirement), the deployment process ensures the integration of both frontend and backend components.
 
 ---
 
-## Available Deployment Methods
+### Available Deployment Methods
 
 1. **Local Deployment for Testing and Development**:  
    This mode is suitable for local testing or active development. The backend proxy runs as a `Node.js` application, and the frontend is built and served as static files through the same instance.
@@ -512,7 +589,7 @@ This application provides flexible deployment options to cater to different stag
 
 ---
 
-## To Deploy and Run Locally
+### To Deploy and Run Locally
 
 1. Build the frontend project:
    ```bash
@@ -535,7 +612,7 @@ This application provides flexible deployment options to cater to different stag
 
 ---
 
-## To Create and Package a Standalone Application
+### To Create and Package a Standalone Application
 
 1. Build the frontend project (if not already built):
    ```bash
@@ -570,40 +647,8 @@ This application provides flexible deployment options to cater to different stag
    ```
 
 ---
-
-
 ---
 
-## Environment Variables
-
-To ensure secure and seamless configuration, the application relies on environment variables for both the frontend and backend. These variables allow sensitive information, such as API credentials, to be stored securely and enable customization for different environments (e.g., development, testing, production).
-
-Each environment variable should be defined in the respective `.env`` files for the frontend and backend folders, ensuring proper integration and functionality. 
-
-```
-censys-assessment/
-├── backend/      # Backend proxy implementation
-│   ├── .env      # Backend environment variables file
-├── .env          # Frontend environment variables file
-```
-
-Below are the required environment variables for each part of the application:
-
-### Backend Environment Variables
-
-The backend requires the following variables to securely interact with the Censys REST API:
-- `CENSYS_API_ID`: Your unique API ID for Censys.
-- `CENSYS_API_SECRET`: Your secret key for Censys API authentication.
-- `CENSYS_API_URL`: The endpoint URL for the Censys Search REST API.
-
-### Frontend Environment Variables
-
-The frontend requires the following variables to configure the build path and communicate with the backend proxy:
-- `BUILD_PATH`: Specifies the path for the compiled frontend build folder, typically set to `./backend/build`.
-- `REACT_APP_CENSYS_PROXY_URL`: The URL of the backend proxy for secure API requests.
-
-
----
 
 ## Contributing
 
@@ -614,11 +659,13 @@ The frontend requires the following variables to configure the build path and co
 5. Open a pull request.
 
 ---
+---
 
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
 
+---
 ---
 
 ## Contact
