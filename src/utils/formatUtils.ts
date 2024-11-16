@@ -30,3 +30,14 @@ export const jsonToUrl = (baseUrl: string, params: Record<string, any>): string 
 
     return url.toString();
 };
+
+
+/**
+ * Converts a number to a local formatted number.
+ *
+ * @param num - number to format.
+ * @returns A string with the formatted number.
+ */
+export const formatNumber = (num: number): string => {
+  return num.toLocaleString('en-US');
+};

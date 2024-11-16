@@ -8,6 +8,7 @@ import LoadingSpinner from './LoadingSpinner'; // Spinner for loading state
 import { fetchSearchResults, fetchNextPage } from '../../services/searchService'; // API service functions
 import { Box, Typography } from '@mui/material'; // Material-UI components for layout and styling
 import { searchReducer, initialState } from '../../reducers/searchReducer'; // Import the search reducer and initial state
+import { formatNumber } from '../../utils/formatUtils';
 
 
 /**
@@ -94,6 +95,9 @@ const SearchPage: React.FC = () => {
         </Typography>
       ) : (
         <>
+         <Typography variant="body1" color="text.secondary" sx={{ margin: '15px 0px 0px 10px' }}>
+          Results: {formatNumber(total)}
+         </Typography>
           {/* Display the list of results */}
           <ResultList results={results} total={total} />
 
