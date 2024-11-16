@@ -24,6 +24,7 @@ To enhance security, the application includes a **Node.js-based secure proxy bac
 10. [Frontend Components and Architecture](#frontend-components-and-architecture)
 11. [Unit Testing](#unit-testing)
 12. [Deployment](#deployment)
+13. [Technical Debts](#technical-debts)
 
 ---
 ---
@@ -676,6 +677,45 @@ This application provides flexible deployment options to cater to different stag
    ```plaintext
    http://localhost:5001
    ```
+
+
+---
+---
+
+## Technical Debts
+
+1. **End-to-End Testing**: 
+To ensure the reliability of the application, end-to-end testing automation should be implemented. Using a framework like WebdriverIO is recommended for scripting and executing automated test scenarios that simulate real user interactions.
+
+2. **Sorting and Page Size**: 
+The UI functionality can be enhanced by incorporating options for sorting results and adjusting the page size (pagination). This will improve user experience by allowing customized data views based on user preferences.
+
+3. **Comprehensive Unit Testing**: 
+Expand the unit test coverage by adding more test cases and suites to validate a broader range of functionality. This will ensure higher code quality, reduce potential bugs, and improve maintainability.
+
+4.	**Error Handling Improvements**:
+Enhance error handling mechanisms throughout the application to provide more detailed and user-friendly error messages. This includes logging errors effectively on the backend and showing contextual messages on the frontend.
+
+5.	**Performance Optimization**:
+Analyze and optimize performance, particularly for handling large datasets. Techniques such as lazy loading for pagination, optimizing API calls, and minimizing re-renders in React components can be implemented.
+
+6.	**Accessibility Enhancements**:
+Ensure the application adheres to accessibility standards (e.g., WCAG 2.1). This includes adding ARIA labels, keyboard navigation support, and color contrast improvements.
+
+7.	**State Management Scalability**:
+Evaluate the current state management approach (e.g., reducer) for scalability. If the application grows, consider migrating to a more robust solution like Redux or Zustand.
+
+8.	**Backend Security Enhancements**:
+Strengthen the backend proxy by adding:
+   - Input validation for incoming requests.
+	- Rate limiting to prevent abuse.
+	- IP whitelisting or token-based authentication for enhanced security.
+
+9.	**Logging and Monitoring**:
+Add comprehensive logging and monitoring solutions for both the frontend and backend. This includes capturing API request/response times, user actions, and system errors.
+
+10. **Configuration Management**:
+Implement a more robust configuration management strategy for handling environment variables securely across different environments (development, staging, production).
 
 ---
 ---
