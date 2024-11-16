@@ -3,10 +3,32 @@
 import { jsonToUrl } from "../utils/formatUtils"; // Utility function to convert JSON to URL with query parameters
 import { SearchResponse } from "../types/object-types"; // Type definition for the response structure
 
-// Base URL for the API endpoint to fetch search results
-// Value for this URL is stored in .env file for security purposes.
-const API_BASE_URL = process.env.REACT_APP_CENSYS_PROXY_URL || ''; // Adjust this to the actual endpoint if deployed
+// Port number where the application is running.
+// Typically provided by the environment or defaults to a specific value in development.
+const PORT = process.env.PORT;
 
+// Name of the current GitHub Codespace.
+// Used for dynamically constructing the URL when running in a Codespace environment.
+const codespaceName = process.env.CODESPACE_NAME;
+
+// Domain for GitHub Codespace port forwarding.
+// Combines with the codespace name and port to form the full URL.
+const domain = process.env.GITHUB_CODESPACE_PORT_FORWARDING_DOMAIN;
+
+// Dynamically construct the full URL for the application in GitHub Codespaces.
+// If the application is running in a Codespace and the domain is available,
+// the URL is constructed using the pattern: https://<CODESPACE_NAME>-<PORT>.<DOMAIN>
+// Otherwise, defaults to `null`, meaning fallback logic should be used.
+const codespaceUrl = domain && PORT
+  ? `https://${codespaceName}-${PORT}.${domain}`
+  : null;
+
+// Base URL for the API endpoint to fetch search results.
+// Priority order:
+// 1. Use dynamically constructed URL from Codespaces if available.
+// 2. Use the URL specified in the `.env` file via REACT_APP_CENSYS_PROXY_URL for external configurations.
+// 3. Fallback to an empty string if no URL is available (adjust as necessary for your deployment requirements).
+const API_BASE_URL = codespaceUrl ?? (process.env.REACT_APP_CENSYS_PROXY_URL || '');
 /**
  * Fetches search results from the backend API.
  *
