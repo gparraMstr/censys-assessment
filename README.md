@@ -13,18 +13,19 @@ To enhance security, the application includes a **Node.js-based secure proxy bac
 ## Table of Contents
 
 1. [Features](#features)
-2. [Prerequisites](#prerequisites)
-3. [Installation](#installation)
-4. [Environment Variables](#environment-variables)
-5. [Build Instructions](#build-instructions)
-6. [Run the Application](#run-the-application)
-7. [How to Test](#how-to-test)
-8. [Folder Structure](#folder-structure)
-9. [Backend Implementation as a Secure Proxy](#backend-implementation-as-a-secure-proxy)
-10. [Frontend Components and Architecture](#frontend-components-and-architecture)
-11. [Unit Testing](#unit-testing)
-12. [Deployment](#deployment)
-13. [Technical Debts](#technical-debts)
+2. [Quick Start](#quick-start)
+3. [Prerequisites](#prerequisites)
+4. [Installation](#installation)
+5. [Environment Variables](#environment-variables)
+6. [Build Instructions](#build-instructions)
+7. [Run the Application](#run-the-application)
+8. [How to Test](#how-to-test)
+9. [Folder Structure](#folder-structure)
+10. [Backend Implementation as a Secure Proxy](#backend-implementation-as-a-secure-proxy)
+11. [Frontend Components and Architecture](#frontend-components-and-architecture)
+12. [Unit Testing](#unit-testing)
+13. [Deployment](#deployment)
+14. [Technical Debts](#technical-debts)
 
 ---
 ---
@@ -38,6 +39,15 @@ To enhance security, the application includes a **Node.js-based secure proxy bac
 - **Modular Component Architecture**: Features a scalable and reusable component-based design for maintainability and future enhancements.
 - **Modern UI with Dynamic Feedback**: Styled with Material-UI to deliver a responsive, accessible, and visually appealing interface, featuring a dynamic loading spinner to provide real-time feedback during API calls.
 - **Built with React and TypeScript**: Leverages modern web development technologies for strong typing, maintainability, and efficient performance.
+
+---
+---
+
+## Quick Start
+
+This README provides comprehensive details on installation, configuration, starting/testing the **Censys Search application**, and the design and architecture for both the frontend and backend proxy implementations.
+
+For a concise guide to quickly start and manually test the application, please refer to the **[Quick Start](./QUICKSTART.md)** file.
 
 ---
 ---
