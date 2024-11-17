@@ -62,7 +62,7 @@ Once the Codespace is ready:
 
 ### 3. Testing the Application
 1. Open the dynamically generated URL in a browser.
-2. Follow these steps in [How to Test](./README.md#how-to-test) section to test the application manually or follow these simpler steps:
+2. Follow these steps in [How to Test](./README.md#how-to-test) section in README file to test the application manually or follow these simpler steps:
    - Enter a search query in the text field.
    - Click the **Search** button.
    - Scroll through paginated results.

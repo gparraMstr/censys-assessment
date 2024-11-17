@@ -51,6 +51,8 @@ This README provides comprehensive details on installation, configuration, start
 
 For a concise guide to quickly start and manually test the application, please refer to the **[Quick Start](./QUICKSTART.md)** file.
 
+Alternatively, use [GitHub Codespaces](./CODESPACES.md) if available or supported for quick setup and manual testing.
+
 ---
 ---
 
@@ -201,7 +203,7 @@ These instructions are meant to compile the frontend application.
       Designed for development purposes, this mode allows developers to work on the Frontend with real-time code reloading, enabling efficient testing and debugging. In this setup, the backend proxy runs on port `5001` to handle API requests, while the Frontend runs on a separate development server on port `3000`. Both services must run simultaneously for full functionality.
 
    3. **GitHub Codespaces**:
-   GitHub Codespaces provides a cloud-based development environment. It allows you to quickly test and run the application without requiring a local setup. See the [GitHub Codespaces](./CODESPACES.md) section below for detailed steps.
+   GitHub Codespaces provides a cloud-based development environment. It allows you to quickly test and run the application without requiring a local setup. See the [GitHub Codespaces](./CODESPACES.md) readme page for detailed steps.
 
 ---
 
