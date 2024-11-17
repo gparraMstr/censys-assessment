@@ -1,9 +1,9 @@
 
 # Censys Search Application
 
-A **React-based** web application designed for searching IPv4 hosts and displaying detailed protocol information as shown in screenshot below. The application supports paginated results for seamless navigation and utilizes the **Censys REST API** for data retrieval. It features a clean and responsive interface styled with Material-UI, a modular component architecture for maintainability and scalability, and modern state management techniques for efficient performance.
+A **React-based** web application designed for searching IPv4 hosts and displaying detailed protocol information as shown in screenshot below. The application supports paginated results for seamless navigation and utilizes the **Censys Search REST API** for data retrieval. It features a clean and responsive interface styled with Material-UI, a modular component architecture for maintainability and scalability, and modern state management techniques for efficient performance.
 
-To enhance security, the application includes a **Node.js-based secure proxy backend**. This proxy acts as an intermediary between the frontend and the **Censys REST API**, ensuring that sensitive API credentials are stored and accessed securely on the server side. By preventing direct exposure of API keys to the client, the backend mitigates potential risks such as credential theft and unauthorized access. The proxy also validates incoming requests, sanitizes data, and enforces controlled communication with the external API, further strengthening the application’s security posture.
+To enhance security, the application includes a **Node.js-based secure proxy backend**. This proxy acts as an intermediary between the frontend and the **Censys Search REST API**, ensuring that sensitive API credentials are stored and accessed securely on the server side. By preventing direct exposure of API keys to the client, the backend mitigates potential risks such as credential theft and unauthorized access. The proxy also validates incoming requests, sanitizes data, and enforces controlled communication with the external API, further strengthening the application’s security posture.
 
 ![Censys App](image.png)
 
@@ -33,13 +33,14 @@ To enhance security, the application includes a **Node.js-based secure proxy bac
 
 ## Features
 
-- **Search for IPv4 Hosts**: Enables users to search for IP addresses and view associated protocol details using the Censys REST API.
+- **Search for IPv4 Hosts**: Enables users to search for IP addresses and view associated protocol details using the Censys Search REST API.
 - **Clean and Paginated Layout**: Displays results in a user-friendly interface with seamless pagination for large datasets.
-- **Secure API Calls**: Implements a Node.js proxy server to securely route requests to the Censys REST API, safeguarding sensitive credentials.
+- **Secure API Calls**: Implements a Node.js proxy server to securely route requests to the Censys Search REST API, safeguarding sensitive credentials.
 - **Environment Variable Configuration**: Utilizes environment variables to securely manage API credentials and configuration, supporting multiple environments (development, testing, production).
 - **Modular Component Architecture**: Features a scalable and reusable component-based design for maintainability and future enhancements.
 - **Modern UI with Dynamic Feedback**: Styled with Material-UI to deliver a responsive, accessible, and visually appealing interface, featuring a dynamic loading spinner to provide real-time feedback during API calls.
 - **Built with React and TypeScript**: Leverages modern web development technologies for strong typing, maintainability, and efficient performance.
+- **GitHub Codespaces**: Support for GitHub Codespaces to run and test the application. 
 
 ---
 ---
@@ -69,6 +70,10 @@ For a concise guide to quickly start and manually test the application, please r
 3. Operating System: Compatible with Linux, MacOS, or Windows supported by Node.js v18.5.x or higher
 4. Access to **Censys Search REST API**: 
    - A valid API ID and API Secret for the Censys Search REST API is required, which can be obtained at https://search.censys.io/account/api 
+
+5. GitHub codespaces
+   - A GitHub account with access to the repository containing the application.
+   - Codespaces enabled for your GitHub account or organization.
 
 ---
 ---
@@ -123,7 +128,7 @@ Environment variables are explained in more details in following section [Enviro
 
 To ensure secure and seamless configuration, the application relies on environment variables for both the frontend and backend. These variables allow sensitive information, such as API credentials, to be stored securely and enable customization for different environments (e.g., development, testing, production).
 
-Each environment variable should be defined in the respective `.env`` files for the frontend and backend folders, ensuring proper integration and functionality. 
+Each environment variable should be defined in the respective `.env` files for the frontend and backend folders, ensuring proper integration and functionality. 
 
 ```
 censys-assessment/
@@ -136,7 +141,7 @@ Below are the required environment variables for each part of the application:
 
 ### Backend Environment Variables
 
-The backend requires the following variables to securely interact with the Censys REST API:
+The backend requires the following variables to securely interact with the Censys Search REST API:
 - `CENSYS_API_ID`: Your unique API ID for Censys.
 - `CENSYS_API_SECRET`: Your secret key for Censys API authentication.
 - `CENSYS_API_URL`: The endpoint URL for the Censys Search REST API.
@@ -147,6 +152,7 @@ The frontend requires the following variables to configure the build path and co
 - `BUILD_PATH`: Specifies the path for the compiled frontend build folder, typically set to `./backend/build`.
 - `REACT_APP_CENSYS_PROXY_URL`: The URL of the backend proxy for secure API requests.
 
+**Note**: the frontend implementation dynamically constructs the base URL for API requests when running in a GitHub Codespace. If a GitHub Codespace environment is not detected (missing required environment variables), it defaults to the configured backend proxy URL. If neither is available, it falls back to the value of `REACT_APP_CENSYS_PROXY_URL`.
 
 ---
 ---
@@ -180,7 +186,7 @@ These instructions are meant to compile the frontend application.
 
    First, it will be necessary to **build Frontend code** prior to running the application as previously indicated in the [Build Instructions](#build-instructions) section above.
 
-   Now, there are two ways to run the application: stand-alone app and production and development mode.
+   This application can be run locally in development or production mode, stand-alone app, or using **GitHub Codespaces** for quick testing.
 
    1. **Stand-alone app**: As specified in the assessment requirements, this is a self-contained application which will require packaging both Frontend and Backend applications into a stand-alone application to run on either Linux, MacOS and Windows. To get the stand-alone app, it is necessary to successfully configure and build the frontend app and this is fully explained in the [Deployment](#deployment) section.
 
@@ -193,6 +199,9 @@ These instructions are meant to compile the frontend application.
 
    - Development Mode:
       Designed for development purposes, this mode allows developers to work on the Frontend with real-time code reloading, enabling efficient testing and debugging. In this setup, the backend proxy runs on port `5001` to handle API requests, while the Frontend runs on a separate development server on port `3000`. Both services must run simultaneously for full functionality.
+
+   3. **GitHub Codespaces**:
+   GitHub Codespaces provides a cloud-based development environment. It allows you to quickly test and run the application without requiring a local setup. See the [GitHub Codespaces](./CODESPACES.md) section below for detailed steps.
 
 ---
 
@@ -234,15 +243,17 @@ Below are the instructions on how to start frontend and/or backend applications.
 - As previously indicated, the application will run at `http://localhost:3000`, and the backend proxy server will handle API requests at `http://localhost:5001`.
 - Open browser and follow manual testing instructions in [How to Test](#how-to-test) section below.
 
+### Using GitHub Codespaces
+GitHub Codespaces provides a cloud-based development environment. It allows you to quickly test and run the application without requiring a local setup. See the [GitHub Codespaces](./CODESPACES.md) section below for detailed steps.
+
 ---
 ---
 
 ## How to Test
 
-1.	Unit Testing:
-- Review [Unit Testing](#unit-testing) for more details on how to run unit testing.
+You can test the application in several ways:
 
-2.	Manual Testing:
+1.	Manual Testing:
 - Run both frontend and backend proxy apps in either Production or Development as previously described.
 - Open a browser and load either `http://localhost:5001` (production) or `http://localhost:3000` (development) 
 - Enter a valid query text in **Search textfield** like this: `services.http.response.headers.location=/.*(\.\.\/)+.*(\.asp|\.php|\.js|\.cgi).*/`
@@ -250,6 +261,10 @@ Below are the instructions on how to start frontend and/or backend applications.
 - Wait for data to load
 - Scroll down and click **Load More Results** button
 - New data should be appended.
+
+2. Unit Testing:
+- Review [Unit Testing](#unit-testing) for more details on how to run unit testing.
+
 
 ---
 ---
@@ -297,7 +312,7 @@ censys-assessment/
 The development of this application was guided by the following principles and considerations:
 
 1.	**Security First**:
-      - A `Node.js` backend proxy was implemented to safeguard sensitive API credentials (e.g., API ID and secret). This design ensures secure communication between the UI and the **Censys REST API**, preventing direct exposure of credentials in the client-side application.
+      - A `Node.js` backend proxy was implemented to safeguard sensitive API credentials (e.g., API ID and secret). This design ensures secure communication between the UI and the **Censys Search REST API**, preventing direct exposure of credentials in the client-side application.
 
 2.	**Modularity and Maintainability**:
       - The frontend is built with a **component-based architecture**, making the application modular and easier to maintain.
@@ -329,7 +344,7 @@ This approach balances delivering a functional and secure application while layi
 
 ## Backend Implementation as a Secure Proxy
 
-The backend serves as a secure proxy (`Node.js`) between the frontend application and the Censys REST API. This design is implemented to enhance security by handling sensitive API credentials on the server side and ensuring they are never exposed to the client.
+The backend serves as a secure proxy (`Node.js`) between the frontend application and the Censys Search REST API. This design is implemented to enhance security by handling sensitive API credentials on the server side and ensuring they are never exposed to the client.
 
 ---
 
@@ -347,7 +362,7 @@ The backend serves as a secure proxy (`Node.js`) between the frontend applicatio
    - The backend can validate incoming requests from the frontend, ensuring only authorized and properly formatted requests are forwarded to the API.
 
 4. **Response Handling**:
-   - The backend processes responses from the Censys REST API, handling any errors or sanitizing data before sending it to the client.
+   - The backend processes responses from the Censys Search REST API, handling any errors or sanitizing data before sending it to the client.
    - This protects the frontend from handling potentially sensitive error details.
 
 5. **CORS and Rate Limiting**:
@@ -513,6 +528,12 @@ Censys Search Application
 - **Reducer**: `src/reducers/searchReducer.ts`
   - Manages the application state (e.g., results, query, loading state, pagination tokens) using a reducer-based approach.
 - **Hooks**: Custom hooks like `useSearchService` abstract the logic for interacting with the backend API and provide a clean interface for components.
+
+#### **8. Key Utilities**
+- **searchService.ts**: `src/services/searchService.ts`
+	- Handles API communication for fetching search results and loading additional pages.
+	- Automatically detects if the application is running in a **GitHub Codespace** by checking environment variables (`CODESPACE_NAME`, `PORT`, and `GITHUB_CODESPACE_PORT_FORWARDING_DOMAIN`).
+	- Dynamically constructs the base URL for API requests when running in a GitHub Codespace or defaults to the configured backend proxy URL.
 
 ---
 
