@@ -7,6 +7,16 @@ To enhance security, the application includes a **Node.js-based secure proxy bac
 
 ![Censys App](image.png)
 
+## Requirements
+
+Using the **Censys REST API**, write and package up a client-side runnable web page that displays a paginated list of IPv4 hosts for a given search query. 
+
+- The general page layout should reflect a barebones version of our own `censys.io/ipv4` page, consisting of:
+- A text field to enter a plain-text search query
+- A list of results that simply displays the IP address and number of protocols associated with each result
+- A button/link to append the next page of results for the given query
+- Use the `/v2/hosts/search` endpoint. 
+
 ---
 ---
 
